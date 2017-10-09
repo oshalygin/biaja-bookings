@@ -1,0 +1,14 @@
+:root {
+  --fs-xxl: 1.25rem; /* 20px */
+  --lh-xxl: 1.5rem; /* 24px */
+  --fs-xl: 1.125rem; /* 18px */
+  --lh-xl: 1.375rem; /* 22px */
+  --fs-lg: 1rem; /* 16px */
+  --lh-lg: 1.25rem; /* 20px */
+  --fs-md: 0.875rem; /* 14px */
+  --lh-md: 1.125rem; /* 18px */
+  --fs-sm: 0.75rem; /* 12px */
+  --lh-sm: 1rem; /* 16px */
+  --fs-xs: 0.625rem; /* 10px */
+  --lh-xs: 0.875rem; /* 14px */
+}
