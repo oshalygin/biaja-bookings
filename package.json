@@ -5,8 +5,7 @@
   "scripts": {
     "start-dev-server": "babel-watch server/application.dev.js",
     "start": "npm-run-all start-dev-server",
-    "lint":
-      "eslint webpack.config.* \"client/**\" \"server/**\" utilities/** --color",
+    "lint": "eslint webpack.config.* \"client/**\" \"server/**\" utilities/** --color",
     "lint:watch": "npm run lint -- --watch",
     "stylelint": "stylelint \"client/**/*.css\"",
     "test": "jest --silent",
@@ -14,15 +13,11 @@
     "test:coverage": "jest --maxWorkers=4 --coverage",
     "build": "npm-run-all build-client build-server",
     "remove-dist": "rimraf ./dist-client && rimraf ./dist-server",
-    "clean-dist":
-      "npm run remove-dist && mkdir dist-client && mkdir dist-server",
+    "clean-dist": "npm run remove-dist && mkdir dist-client && mkdir dist-server",
     "prebuild": "npm run clean-dist",
-    "build-client":
-      "NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config webpack.config.production.js --output-path='./dist-client' --colors",
-    "build-server":
-      "babel ./server --out-dir ./dist-server --ignore spec.js,./server/mocks/ --source-maps",
-    "production":
-      "NODE_ENV=production node --require dist-server/application.production.js"
+    "build-client": "NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config webpack.config.production.js --output-path='./dist-client' --colors",
+    "build-server": "babel ./server --out-dir ./dist-server --ignore spec.js,./server/mocks/ --source-maps",
+    "production": "NODE_ENV=production node --require dist-server/application.production.js"
   },
   "author": "Oleg Shalygin",
   "license": "AGPL-3.0",
@@ -60,7 +55,7 @@
     "redux-devtools-extension": "2.13.2",
     "redux-saga": "0.15.4",
     "style-loader": "0.13.2",
-    "universal-cookie": "2.0.8",
+    "universal-cookie": "^2.1.0",
     "url-loader": "0.5.8",
     "uuid": "3.0.1",
     "winston": "2.3.1",
@@ -140,7 +135,9 @@
   },
   "jest": {
     "testRegex": ".*?(\\.spec).js",
-    "transformIgnorePatterns": ["node_modules"],
+    "transformIgnorePatterns": [
+      "node_modules"
+    ],
     "collectCoverageFrom": [
       "client/**/*.js",
       "client/**/*.jsx",
@@ -149,12 +146,19 @@
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest/build/index.js"
     },
-    "setupFiles": ["./utilities/testSetup.js"],
+    "setupFiles": [
+      "./utilities/testSetup.js"
+    ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/utilities/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/utilities/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     },
-    "coverageReporters": ["json", "html", "text", "lcov", "clover"]
+    "coverageReporters": [
+      "json",
+      "html",
+      "text",
+      "lcov",
+      "clover"
+    ]
   }
 }

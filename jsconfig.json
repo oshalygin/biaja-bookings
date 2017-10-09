@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "checkJs": true
   },
