@@ -1,0 +1,32 @@
+# Node modules
+node_modules
+
+# distribution folder
+dist
+
+# Logging
+npm-debug.log
+yarn-error.log
+
+# Code coverage
+coverage
+
+# Editor specific components
+.vscode/
+.idea/
+
+.nyc_output
+
+# Various configuration files that should NEVER live in CI
+
+service-account.json
+storage-service-account.json
+
+# Debug container
+
+debug-server
+
+# Dist files
+
+dist-client/
+dist-server

@@ -1,0 +1,29 @@
+sudo: required
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+language: node_js
+node_js:
+  - 8.2.1
+
+env:
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  
+install:
+  - npm install
+
+script:
+  - npm run lint
+  - npm run stylelint
+  - npm run test:coverage
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      git config credential.helper "store --file=.git/credentials";
+      echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials;
+    fi
