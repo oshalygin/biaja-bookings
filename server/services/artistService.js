@@ -13,6 +13,7 @@ async function hydrateArtist(artist) {
   }
 
   await artistsCollection.add({
+    dateAdded: new Date(),
     name: artist.name,
     url: artist.url,
   });

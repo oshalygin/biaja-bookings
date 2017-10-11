@@ -26,6 +26,7 @@ async function scrapeArtistData(artist) {
     performances = [
       ...performances,
       {
+        dateAdded: new Date(),
         artist: artist.name,
         date,
         venue,
