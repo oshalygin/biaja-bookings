@@ -8,7 +8,7 @@ import eventsController from '../controllers/eventsController';
 const router = express.Router();
 router.route('/cron-events').get(cronEventsController.get);
 
-router.route('/events').get(eventsController.get);
+router.route('/events/:id?').get(eventsController.get);
 router.route('/artists').get(artistController.get).post(artistController.post);
 
 router.route('/tour').get(tourController.get);

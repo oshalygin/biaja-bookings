@@ -6,7 +6,7 @@ import artists from '../dataAccess/artists';
 import db from '../dataAccess/database';
 
 async function scrapeArtistData(artist) {
-  let performances = [];
+  let events = [];
   const { data } = await axios.get(artist.url);
 
   const $ = cheerio.load(data); //eslint-disable-line id-length
@@ -23,20 +23,21 @@ async function scrapeArtistData(artist) {
       .find('.location span[itemprop="addressRegion"]')
       .text();
 
-    performances = [
-      ...performances,
+    events = [
+      ...events,
       {
         dateAdded: new Date(),
         artist: artist.name,
         date,
         venue,
-        city,
+        city: state ? city : '',
         state,
+        country: state ? 'United States' : city,
       },
     ];
   });
 
-  return performances;
+  return events;
 }
 
 async function scrapeTourData() {
