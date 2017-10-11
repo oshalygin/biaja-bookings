@@ -30,9 +30,9 @@ async function scrapeArtistData(artist) {
         artist: artist.name,
         date,
         venue,
-        city: state ? city : '',
+        city,
         state,
-        country: state ? 'United States' : city,
+        country: state ? 'United States' : 'Overseas',
       },
     ];
   });
@@ -85,9 +85,40 @@ async function getAllEvents() {
   return data;
 }
 
+async function getEventsInUnitedStates(city, state) {
+  let data = [];
+
+  const eventsCollection = db.collection('events');
+  const snapshot = await eventsCollection
+    .where('city', '==', city)
+    .where('state', '==', state)
+    .get();
+
+  snapshot.forEach(document => {
+    data = [...data, { ...document.data() }];
+  });
+
+  return data;
+}
+
+async function getEventsOverseas(city) {
+  let data = [];
+
+  const eventsCollection = db.collection('events');
+  const snapshot = await eventsCollection.where('city', '==', city).get();
+
+  snapshot.forEach(document => {
+    data = [...data, { ...document.data() }];
+  });
+
+  return data;
+}
+
 const eventService = {
   hydrateEvents,
   getAllEvents,
+  getEventsInUnitedStates,
+  getEventsOverseas,
 };
 
 export default eventService;
