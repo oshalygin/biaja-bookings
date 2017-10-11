@@ -1,4 +1,12 @@
 :root {
+  --darkBlue: #006BF2;
+  --error: #F44336;
+  --darkGray: #778088;
+  --textGray: #676A6C;
+  --lightGray: #F3F3F3;
+  --deepGray: #666;
+  --teal: #23C6C8;
+
   /* Brand Colors */
   --red: #ED3620;
   --blue: #0283EA;
@@ -42,4 +50,5 @@
   --highlight: rgba(0, 0, 0, 0.05);
   --link: var(--blue);
   --boxshadow: var(--black0_2);
+  --lowOpacityBoxShadow: rgba(0, 0, 0, 0.2);
 }

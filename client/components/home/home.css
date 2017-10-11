@@ -1,0 +1,37 @@
+@import '../../styles/colors.css';
+@import '../../styles/fonts.css';
+
+.main-content {
+  font-size: var(--font-lg);
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--lightGray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  color: var(--textGray);
+  width: 20em;
+  padding: 0.7em;
+  border: 1px 0 solid;
+}
+
+.text-content {
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+.button-control {
+  flex: 1;
+  padding-bottom: 1em;
+  width: 75%;
+}

@@ -1,14 +1,8 @@
 :root {
-  --fs-xxl: 1.25rem; /* 20px */
-  --lh-xxl: 1.5rem; /* 24px */
-  --fs-xl: 1.125rem; /* 18px */
-  --lh-xl: 1.375rem; /* 22px */
-  --fs-lg: 1rem; /* 16px */
-  --lh-lg: 1.25rem; /* 20px */
-  --fs-md: 0.875rem; /* 14px */
-  --lh-md: 1.125rem; /* 18px */
-  --fs-sm: 0.75rem; /* 12px */
-  --lh-sm: 1rem; /* 16px */
-  --fs-xs: 0.625rem; /* 10px */
-  --lh-xs: 0.875rem; /* 14px */
+  --font-xxl: 2rem; /* 20px */
+  --font-xl: 1.8rem; /* 18px */
+  --font-lg: 1.6rem; /* 16px */
+  --font-md: 1.4rem; /* 14px */
+  --font-sm: 1.2rem; /* 12px */
+  --font-xs: 1rem; /* 10px */
 }
