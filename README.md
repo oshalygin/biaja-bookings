@@ -21,8 +21,9 @@ Supporting Artists
 | Ja Rule     | http://bandsintown.com/JaRule |
 | a Boogie    | http://bandsintown.com/aBoogie |
 
-## Artists are pulled from this source:
+## Artists are pulled from a static source:
 
+In the future they will be pulled form www.billboards.com
 http://www.billboard.com/artists/a
 
 ### Running the application

@@ -6,9 +6,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
-import { hostLocation } from './utilities/endpoints';
 
-import rootSaga from './sagas';
+import rootSaga from './sagas/rootSaga';
 
 // To load styles globally without CSS modules, use the !style!css!{{path}} format.
 // https://github.com/css-modules/css-modules/pull/65#issuecomment-248280248
@@ -27,7 +26,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import App from './components/App.jsx';
-
 
 const store = configureStore();
 store.runSaga(rootSaga);
