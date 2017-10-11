@@ -3,6 +3,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 
 import artists from '../dataAccess/artists';
+import db from '../dataAccess/database';
 
 async function scrapeArtistData(artist) {
   let performances = [];
@@ -48,8 +49,43 @@ async function scrapeTourData() {
   return tourData;
 }
 
-const tourService = {
-  scrapeTourData,
+async function hydrateEvent(event) {
+  const eventCollection = db.collection('events');
+
+  const snapshot = await eventCollection
+    .where('artist', '==', event.artist)
+    .where('date', '==', event.date)
+    .get();
+
+  if (snapshot.size) {
+    return true;
+  }
+
+  await eventCollection.add(event);
+  return true;
+}
+
+async function hydrateEvents() {
+  const events = await scrapeTourData();
+  const hydratedEvents = events.map(event => hydrateEvent(event));
+  await Promise.all(hydratedEvents);
+}
+
+async function getAllEvents() {
+  let data = [];
+
+  const eventsCollection = db.collection('events');
+  const snapshot = await eventsCollection.get();
+  snapshot.forEach(document => {
+    data = [...data, { ...document.data() }];
+  });
+
+  return data;
+}
+
+const eventService = {
+  hydrateEvents,
+  getAllEvents,
 };
 
-export default tourService;
+export default eventService;
