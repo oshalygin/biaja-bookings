@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import version from './versionReducer';
-import user from './userReducer';
+import events from './eventReducer';
 
 const rootReducer = combineReducers({
-  user,
-  version,
+  events,
 });
 
 export default rootReducer;
