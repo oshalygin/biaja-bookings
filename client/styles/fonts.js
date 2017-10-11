@@ -1,8 +1,9 @@
 export default {
-  xxl: '1.25rem', /* 20px */
-  xl: '1.125rem', /* 18px */
-  lg: '1rem', /* 16px */
-  md: '0.875rem', /* 14px */
-  sm: '0.75rem', /* 12px */
-  xs: '0.625rem', /* 10px */
+  fontXxl: '2rem' /* 20px */,
+  fontXl: '1.8rem' /* 18px */,
+  fontLg: '1.6rem' /* 16px */,
+  fontMd: '1.4rem' /* 14px */,
+  fontSm: '1.2rem' /* 12px */,
+  fontXs: '1rem' /* 10px */,
+  fontXxs: '0.9rem' /* 10px */,
 };
