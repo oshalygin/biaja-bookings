@@ -93,7 +93,7 @@ const errorLogger = expressWinston.errorLogger({
   dumpExceptions: true,
 });
 
-export default {
+const logger = {
   logApiError,
   requestLogger,
   errorLogger,
@@ -103,3 +103,4 @@ export default {
   log,
   debug,
 };
+export default logger;

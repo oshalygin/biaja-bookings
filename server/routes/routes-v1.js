@@ -1,5 +1,7 @@
 import express from 'express';
 // import authMiddleware from '../middleware/authMiddleware';
+import performanceController from '../controllers/performancesController';
+import tourController from '../controllers/tourController';
 
 // import authService from '../services/authService';
 
@@ -8,7 +10,8 @@ import express from 'express';
 
 const router = express.Router();
 
-// // {api/v1/auth/login/google}
+router.route('/tour').get(tourController.get);
+// {api/v1/auth/login/google}
 // router
 //   .route('/auth/login/google')
 //   .get(authService.googleAuthentication);
@@ -21,10 +24,7 @@ const router = express.Router();
 // Authenticated Routes
 // router.use(authMiddleware());
 
-// // {api/v1/workOrders}
-// router
-//   .route('/workOrders/:id?')
-//   .get(workOrdersController.get)
+router.route('/performances/:id?').get(performanceController.get);
 //   .put(workOrdersController.put)
 //   .post(workOrdersController.post)
 //   .delete(workOrdersController.delete);
