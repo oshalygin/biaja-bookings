@@ -19,8 +19,8 @@ coverage
 
 # Various configuration files that should NEVER live in CI
 
-service-account.json
-storage-service-account.json
+# service-account.json
+# storage-service-account.json
 
 # Debug container
 
