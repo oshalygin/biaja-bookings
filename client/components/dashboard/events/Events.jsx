@@ -77,8 +77,7 @@ class Events extends React.Component {
         return data.state === selectedState;
       }),
     )(locations);
-
-    return ['All', ...cities];
+    return overseas ? cities : ['All', ...cities];
   };
 
   onSearch = selected => {
