@@ -5,7 +5,8 @@
   "engines": { "node": "8.5.0", "yarn": "1.1.0" },
   "scripts": {
     "start-dev-server": "babel-watch server/application.dev.js",
-    "start": "babel-watch server/application.dev.js",
+    "dev": "babel-watch server/application.dev.js",
+    "start": "NODE_ENV=production node dist-server/application.production.js",
     "lint": "eslint webpack.config.* \"client/**\" \"server/**\" utilities/** --color",
     "lint:watch": "npm run lint -- --watch",
     "stylelint": "stylelint \"client/**/*.css\"",

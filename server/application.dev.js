@@ -8,7 +8,6 @@ import configuration from './utilities/configuration';
 import webpackConfiguration from '../webpack.config.dev';
 import logger from './utilities/logger';
 
-// import authService from './services/authService';
 import v1router from './routes/routes-v1';
 
 const port = configuration.port;
@@ -17,8 +16,6 @@ const application = express();
 application.use(bodyParser.urlencoded({ extended: true }));
 application.use(bodyParser.json());
 application.use(cookieParser());
-
-// authService.initializePassportStrategies(application);
 
 const applicationCompiler = webpack(webpackConfiguration);
 application.use(
