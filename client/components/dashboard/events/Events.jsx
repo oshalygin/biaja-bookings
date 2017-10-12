@@ -11,7 +11,7 @@ import GenericTopBar from '../../common/GenericAppBar';
 import DataTable from './DataTable';
 
 import './events.css';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress, FlatButton } from 'material-ui';
 
 const propTypes = {
   eventActions: PropTypes.object.isRequired,
@@ -79,12 +79,8 @@ class Events extends React.Component {
     )(locations);
   };
 
-  onChange = (event, index, payload) => {
+  onSearch = selected => {
     const { eventActions } = this.props;
-    const { selected } = this.state;
-
-    const property = payload.name;
-    selected[property] = payload.value;
 
     const countries = this.getCountries();
     const states = this.getStates();
@@ -99,7 +95,15 @@ class Events extends React.Component {
       state,
       city,
     });
+  };
 
+  onChange = (event, index, payload) => {
+    const { selected } = this.state;
+
+    const property = payload.name;
+    selected[property] = payload.value;
+
+    this.onSearch(selected);
     return this.setState({ selected });
   };
 
@@ -129,6 +133,13 @@ class Events extends React.Component {
               selected={selected}
               onChange={this.onChange}
             />
+            <div styleName="button-container">
+              <FlatButton
+                primary
+                label="search"
+                onClick={() => this.onSearch(selected)} //eslint-disable-line react/jsx-no-bind
+              />
+            </div>
           </div>
           <div styleName="table-container">
             {eventsComponent}
