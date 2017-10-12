@@ -10,6 +10,8 @@ import {
 import DataRow from './DataRow';
 
 import colors from '../../../styles/colors';
+import './events.css';
+import dateUtilities from '../../../utilities/dateUtilities';
 
 const propTypes = {
   events: PropTypes.array.isRequired,
@@ -18,30 +20,54 @@ const propTypes = {
 const DataTable = ({ events }) => {
   return (
     <div>
-      <Table
-        selectable={false}
-        style={{
-          backgroundColor: colors.neutral.lightGray,
-        }}
-      >
-        <TableHeader
-          enableSelectAll={false}
-          displaySelectAll={false}
-          adjustForCheckbox={false}
+      <div styleName="table">
+        <Table
+          selectable={false}
+          style={{
+            backgroundColor: colors.neutral.lightGray,
+          }}
         >
-          <TableRow>
-            <TableHeaderColumn>Event Date</TableHeaderColumn>
-            <TableHeaderColumn>Venue</TableHeaderColumn>
-            <TableHeaderColumn>City</TableHeaderColumn>
-            <TableHeaderColumn>State</TableHeaderColumn>
-            <TableHeaderColumn>Country</TableHeaderColumn>
-            <TableHeaderColumn>Artist</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {events.map((event, key) => <DataRow event={event} key={key} />)}
-        </TableBody>
-      </Table>
+          <TableHeader
+            enableSelectAll={false}
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+          >
+            <TableRow>
+              <TableHeaderColumn>Event Date</TableHeaderColumn>
+              <TableHeaderColumn>Venue</TableHeaderColumn>
+              <TableHeaderColumn>City</TableHeaderColumn>
+              <TableHeaderColumn>State</TableHeaderColumn>
+              <TableHeaderColumn>Country</TableHeaderColumn>
+              <TableHeaderColumn>Artist</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {events.map((event, key) => <DataRow event={event} key={key} />)}
+          </TableBody>
+        </Table>
+      </div>
+      <div styleName="mobile-table">
+        <div styleName="mobile-table-row">
+          <div styleName="mobile-table-header">Event Date</div>
+          <div styleName="mobile-table-header">Venue</div>
+          <div styleName="mobile-table-header">Artist</div>
+        </div>
+        {events.map((event, key) => {
+          return (
+            <div styleName="mobile-table-row" key={key}>
+              <div styleName="mobile-table-cell">
+                {dateUtilities.setDisplayDate(event.date)}
+              </div>
+              <div styleName="mobile-table-cell">
+                {event.venue}
+              </div>
+              <div styleName="mobile-table-cell">
+                {event.artist}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

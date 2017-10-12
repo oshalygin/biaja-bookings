@@ -1,6 +1,10 @@
 @import '../../../styles/fonts.css';
 @import '../../../styles/colors.css';
 
+.table {
+  display: initial;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -55,7 +59,31 @@
   flex: 1;
 }
 
+.mobile-table {
+  display: none;
+}
+
+.mobile-table-header {
+  display: none;
+}
+
+.mobile-table-row {
+  display: none;
+}
+
+.mobile-table-cell {
+  display: none;
+}
+
 @media screen and (max-width: 440px) {
+  .table-container {
+    padding-top: 2em;
+  }
+
+  .table {
+    display: none;
+  }
+
   .controls-container {
     width: 100%;
   }
@@ -79,5 +107,27 @@
     display: flex;
     flex: 1;
     margin-left: 0.5em;
+  }
+
+  .mobile-table {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .mobile-table-row {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .mobile-table-header {
+    display: inline-block;
+    color: RGB(153, 153, 153);
+    font-size: 12px;
+    width: 33%;
+  }
+
+  .mobile-table-cell {
+    display: inline-block;
+    width: 33%;
   }
 }

@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import dateFns from 'date-fns';
 import { TableRow, TableRowColumn } from 'material-ui';
 
-export function setDisplayDate(dateInMillis) {
-  const date = new Date(dateInMillis);
-  return dateFns.format(date, 'MMMM D, YYYY');
-}
+import dateUtilities from '../../../utilities/dateUtilities';
 
 const propTypes = {
   event: PropTypes.shape({
@@ -24,7 +20,7 @@ const DataRow = ({ event }) => {
   return (
     <TableRow style={{ lineHeight: '48px' }}>
       <TableRowColumn style={{ fontWeight: '600' }}>
-        {setDisplayDate(event.date)}
+        {dateUtilities.setDisplayDate(event.date)}
       </TableRowColumn>
       <TableRowColumn>
         {event.venue}
