@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MuiThemeProvider } from 'material-ui';
@@ -12,11 +13,6 @@ import muiTheme from '../../utilities/muiTheme';
 import './dashboard.css';
 
 class Dashboard extends React.Component {
-  componentWillMount() {
-    const { eventActions } = this.props;
-    eventActions.retrieveEvents();
-  }
-
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
