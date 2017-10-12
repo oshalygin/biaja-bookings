@@ -46,6 +46,10 @@ const artists = [
     name: 'Soulja Boy',
     url: "http://bandsintown.com/SouljaBoyTell'Em",
   },
+  {
+    name: 'The Jillionaire',
+    url: "http://bandsintown.com/TheJillionaire",
+  },
 ];
 
 export default artists;
