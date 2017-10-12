@@ -63,7 +63,7 @@ async function hydrateEvent(event) {
     return true;
   }
 
-  await eventCollection.add(event);
+  await eventCollection.add({ ...event, eventType: 'Ticketed Concerts' });
   return true;
 }
 
