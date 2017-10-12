@@ -54,3 +54,29 @@
   margin-left: 2em;
   flex: 1;
 }
+
+@media screen and (max-width: 440px) {
+  .control-container {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .control-label {
+    flex: 1;
+    text-transform: uppercase;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  .select-control {
+    display: flex;
+    margin-left: 0.5em;
+    flex: 1;
+  }
+}

@@ -12,3 +12,14 @@
   background-color: var(--ash);
 }
 
+.list-item-text {
+  display: initial;
+}
+
+@media screen and (max-width: 440px) {
+  .list-item-text {
+    display: none;
+  }
+}
+
+
