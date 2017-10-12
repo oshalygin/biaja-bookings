@@ -6,7 +6,8 @@
   "scripts": {
     "start-dev-server": "babel-watch server/application.dev.js",
     "dev": "babel-watch server/application.production.js",
-    "start": "NODE_ENV=production ./node_modules/.bin/npm-run-all build dev",
+    "postinstall": "npm run build",
+    "start": "NODE_ENV=production node server-dist/application.production.js",
     "lint": "eslint webpack.config.* \"client/**\" \"server/**\" utilities/** --color",
     "lint:watch": "npm run lint -- --watch",
     "stylelint": "stylelint \"client/**/*.css\"",
