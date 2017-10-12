@@ -2,7 +2,7 @@
   "name": "biaja-bookings",
   "version": "1.0.0",
   "description": "Biaja Data Aggregation",
-  "engines": { "node": "8.5.0", "yarn": "1.1.0" },
+  "engines": { "node": "8.5.0" },
   "scripts": {
     "start-dev-server": "babel-watch server/application.dev.js",
     "start": "node dist-server/application.production.js",
