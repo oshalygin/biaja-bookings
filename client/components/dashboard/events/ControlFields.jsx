@@ -5,6 +5,7 @@ import Control from './Control';
 const propTypes = {
   countries: PropTypes.array.isRequired,
   states: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired,
   disabledState: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   selected: PropTypes.shape({
@@ -15,6 +16,7 @@ const propTypes = {
 const ControlFields = ({
   countries,
   states,
+  cities,
   selected,
   disabledState,
   onChange,
@@ -35,6 +37,14 @@ const ControlFields = ({
         data={states}
         selected={selected.state}
         disabled={disabledState}
+        onChange={onChange}
+      />
+      <Control
+        name="city"
+        controlLabel="city"
+        data={cities}
+        selected={selected.city}
+        disabled={false}
         onChange={onChange}
       />
     </div>

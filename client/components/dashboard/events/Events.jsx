@@ -22,6 +22,7 @@ class Events extends React.Component {
     selected: {
       country: 0,
       state: 0,
+      city: 0,
     },
   };
 
@@ -58,6 +59,19 @@ class Events extends React.Component {
           R.sortWith([R.ascend(R.prop('state'))]),
         )(locations);
 
+    const cities = R.compose(
+      R.uniqBy(data => data),
+      R.map(data => data.city),
+      R.filter(data => {
+        if (overseas) {
+          return !data.state;
+        }
+
+        const selectedState = states.length ? states[selected.state] : '';
+        return data.state === selectedState;
+      }),
+    )(locations);
+
     return (
       <div styleName="container">
         <GenericTopBar title="Events" />
@@ -66,6 +80,7 @@ class Events extends React.Component {
             <ControlFields
               countries={countries}
               states={states}
+              cities={cities}
               disabledState={overseas}
               selected={selected}
               onChange={this.onChange}
