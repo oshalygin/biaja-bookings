@@ -37,6 +37,9 @@ const DataRow = ({ event }) => {
       <TableRowColumn>
         {event.artist}
       </TableRowColumn>
+      <TableRowColumn>
+        {event.eventType}
+      </TableRowColumn>
     </TableRow>
   );
 };

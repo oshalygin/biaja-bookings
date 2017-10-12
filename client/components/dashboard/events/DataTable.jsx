@@ -39,6 +39,7 @@ const DataTable = ({ events }) => {
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>
               <TableHeaderColumn>Artist</TableHeaderColumn>
+              <TableHeaderColumn>Type</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
