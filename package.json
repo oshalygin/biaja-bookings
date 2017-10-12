@@ -12,7 +12,7 @@
     "test": "jest --silent",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "jest --maxWorkers=4 --coverage",
-    "build": "npm-run-all build-client build-server",
+    "build": "./node_modules/.bin/npm-run-all build-client build-server",
     "postinstall": "npm run build",
     "remove-dist": "rimraf ./dist-client && rimraf ./dist-server",
     "clean-dist": "npm run remove-dist && mkdir dist-client && mkdir dist-server",
