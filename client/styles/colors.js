@@ -20,6 +20,7 @@ export default {
     dim: '#555',
     dark: '#333',
     black: '#000',
+    lightGray: '#F3F3F3',
   },
   opacity: {
     /* eslint-disable camelcase */

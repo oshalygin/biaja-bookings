@@ -7,14 +7,18 @@ import * as eventActionCreators from '../../../actions/eventActions';
 import * as locationActionCreators from '../../../actions/locationActions';
 
 import ControlFields from './ControlFields';
+import GenericTopBar from '../../common/GenericAppBar';
+import DataTable from './DataTable';
 
 import './events.css';
-import GenericTopBar from '../../common/GenericAppBar';
+import { CircularProgress } from 'material-ui';
 
 const propTypes = {
   eventActions: PropTypes.object.isRequired,
   locationActions: PropTypes.object.isRequired,
   locations: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 class Events extends React.Component {
@@ -31,26 +35,20 @@ class Events extends React.Component {
     locationActions.retrieveLocations();
   }
 
-  onChange = (event, index, payload) => {
-    const { selected } = this.state;
-
-    const property = payload.name;
-    selected[property] = payload.value;
-
-    return this.setState({ selected });
-  };
-
-  render() {
+  getCountries = () => {
     const { locations } = this.props;
-    const { selected } = this.state;
 
-    const countries = R.uniqBy(data => data.country, locations).map(
+    return R.uniqBy(data => data.country, locations).map(
       location => location.country,
     );
+  };
 
+  getStates = () => {
+    const { locations } = this.props;
+    const { selected } = this.state;
     const overseas = selected.country === 1;
 
-    const states = overseas
+    return overseas
       ? []
       : R.compose(
           R.uniqBy(data => data),
@@ -58,8 +56,16 @@ class Events extends React.Component {
           R.map(location => location.state),
           R.sortWith([R.ascend(R.prop('state'))]),
         )(locations);
+  };
 
-    const cities = R.compose(
+  getCities = () => {
+    const { locations } = this.props;
+    const { selected } = this.state;
+    const overseas = selected.country === 1;
+
+    const states = this.getStates();
+
+    return R.compose(
       R.uniqBy(data => data),
       R.map(data => data.city),
       R.filter(data => {
@@ -71,6 +77,44 @@ class Events extends React.Component {
         return data.state === selectedState;
       }),
     )(locations);
+  };
+
+  onChange = (event, index, payload) => {
+    const { eventActions } = this.props;
+    const { selected } = this.state;
+
+    const property = payload.name;
+    selected[property] = payload.value;
+
+    const countries = this.getCountries();
+    const states = this.getStates();
+    const cities = this.getCities();
+
+    const country = countries[selected.country];
+    const state = states[selected.state];
+    const city = cities[selected.city];
+
+    eventActions.retrieveEvents({
+      country,
+      state,
+      city,
+    });
+
+    return this.setState({ selected });
+  };
+
+  render() {
+    const { events, loading } = this.props;
+    const { selected } = this.state;
+
+    const overseas = selected.country === 1;
+    const countries = this.getCountries();
+    const states = this.getStates();
+    const cities = this.getCities();
+
+    const eventsComponent = !loading
+      ? <DataTable events={events} />
+      : <CircularProgress />;
 
     return (
       <div styleName="container">
@@ -86,6 +130,9 @@ class Events extends React.Component {
               onChange={this.onChange}
             />
           </div>
+          <div styleName="table-container">
+            {eventsComponent}
+          </div>
         </div>
       </div>
     );
@@ -97,6 +144,8 @@ Events.propTypes = propTypes;
 const mapStateToProps = state => {
   return {
     locations: state.locations,
+    events: state.events,
+    loading: state.loading.events,
   };
 };
 

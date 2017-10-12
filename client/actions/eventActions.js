@@ -1,7 +1,8 @@
 import actionTypes from './actionTypes';
 
-export const retrieveEvents = () => ({
+export const retrieveEvents = data => ({
   type: actionTypes.RETRIEVE_EVENTS,
+  data,
 });
 
 export const getEventsSuccess = data => ({
