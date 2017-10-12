@@ -3,13 +3,7 @@ import R from 'ramda';
 import eventService from '../services/eventService';
 
 export async function get(request, response) {
-  // Check if the scrap request happened recently(<4 hours)
-
-  // Call scrape service
   const events = await eventService.getAllEvents();
-  // const cities = tourData
-  //   .sort((previous, next) => previous.state - next.state)
-  //   .map(data => `${data.city}, ${data.state}`);
 
   const locations = R.compose(
     R.map(data => {

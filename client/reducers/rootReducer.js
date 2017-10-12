@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import initialState from './initialState';
 import events from './eventReducer';
+import locations from './locationsReducer';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  events,
+  locations,
 });
 
 export default rootReducer;
