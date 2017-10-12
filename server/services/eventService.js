@@ -101,6 +101,21 @@ async function getEventsInUnitedStates(city, state) {
   return data;
 }
 
+async function getEventsInUsByState(state) {
+  let data = [];
+
+  const eventsCollection = db.collection('events');
+  const snapshot = await eventsCollection
+    .where('state', '==', state)
+    .get();
+
+  snapshot.forEach(document => {
+    data = [...data, { ...document.data() }];
+  });
+
+  return data;
+}
+
 async function getEventsOverseas(city) {
   let data = [];
 
@@ -118,6 +133,7 @@ const eventService = {
   hydrateEvents,
   getAllEvents,
   getEventsInUnitedStates,
+  getEventsInUsByState,
   getEventsOverseas,
 };
 

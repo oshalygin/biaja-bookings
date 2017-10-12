@@ -65,7 +65,7 @@ class Events extends React.Component {
 
     const states = this.getStates();
 
-    return R.compose(
+    const cities = R.compose(
       R.uniqBy(data => data),
       R.map(data => data.city),
       R.filter(data => {
@@ -77,6 +77,8 @@ class Events extends React.Component {
         return data.state === selectedState;
       }),
     )(locations);
+
+    return ['All', ...cities];
   };
 
   onSearch = selected => {
