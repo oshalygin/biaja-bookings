@@ -1,14 +1,13 @@
 /* eslint-disable indent */
+import R from 'ramda';
 import initialState from './initialState';
 import actionTypes from '../actions/actionTypes.js';
 
-export default function eventReducer(
-  state = initialState.events,
-  action,
-) {
+export default function eventReducer(state = initialState.events, action) {
   switch (action.type) {
     case actionTypes.GET_EVENTS_SUCCESS: {
-      return action.data;
+      const events = action.data;
+      return R.sortWith([R.ascend(R.prop('date'))], events);
     }
     default: {
       return state;
