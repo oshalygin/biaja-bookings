@@ -19,7 +19,7 @@ const propTypes = {
 
 const DataTable = ({ events }) => {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <div styleName="table">
         <Table
           selectable={false}

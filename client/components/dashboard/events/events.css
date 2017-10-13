@@ -121,7 +121,7 @@
 
   .mobile-table-header {
     display: inline-block;
-    color: RGB(153, 153, 153);
+    color: rgb(153, 153, 153);
     font-size: 12px;
     width: 33%;
   }

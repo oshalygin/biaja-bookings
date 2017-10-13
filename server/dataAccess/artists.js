@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 const artists = [
   { name: 'JaRule', url: 'http://bandsintown.com/JaRule' },
-  { name: 'a Boogie', url: 'http://bandsintown.com/aBoogie' },
+  { name: 'a Boogie', url: 'http://bandsintown.com/ABOOGIEWITDAHOODIE' },
   { name: 'Fat Joe', url: 'http://bandsintown.com/FatJoe' },
   { name: 'Waka Flocka', url: 'http://bandsintown.com/WakaFlockaFlame' },
   { name: 'Asap Ferg', url: 'http://bandsintown.com/ASAPFerg' },
@@ -48,7 +48,7 @@ const artists = [
   },
   {
     name: 'The Jillionaire',
-    url: "http://bandsintown.com/TheJillionaire",
+    url: 'http://bandsintown.com/TheJillionaire',
   },
 ];
 
