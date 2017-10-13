@@ -7,10 +7,12 @@
 
 .container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .events-container {
+  overflow: auto;
+  height: 100%;
   color: var(--black);
   font-size: var(--font-xxs);
   padding: 2em;
@@ -121,7 +123,7 @@
 
   .mobile-table-header {
     display: inline-block;
-    color: rgb(153, 153, 153);
+    color: RGB(153, 153, 153);
     font-size: 12px;
     width: 33%;
   }
