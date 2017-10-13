@@ -49,14 +49,12 @@ async function getBusinessWebsite(url) {
   return website;
 }
 
-async function yelpVenue(venue, city, state) {
+async function yelpVenue(accessToken, event) {
   try {
-    const accessToken = await auth();
-
-    const encodedVenue = encodeURIComponent(venue);
-    const encodedLocation = state
-      ? encodeURIComponent(`${city}, ${state}`)
-      : encodeURIComponent(city);
+    const encodedVenue = encodeURIComponent(event.venue);
+    const encodedLocation = event.state
+      ? encodeURIComponent(`${event.city}, ${event.state}`)
+      : encodeURIComponent(`${event.city}, ${event.country}`);
 
     const endpoint = `${YELP_SEARCH_ENDPOINT}?categories=${SEARCH_API_CATEGORIES}&term=${encodedVenue}&location=${encodedLocation}`;
     const { data } = await axios.get(endpoint, {
@@ -68,27 +66,55 @@ async function yelpVenue(venue, city, state) {
     const firstMatch = data.businesses.length ? data.businesses[0] : {};
     if (!firstMatch) {
       return {
+        ...event,
         price: null,
         phone: null,
       };
     }
-    const url = firstMatch.url.split('?')[0];
-    const website = await getBusinessWebsite(url);
 
-    return {
+    let website = null;
+    if (firstMatch.url) {
+      const url = firstMatch.url.split('?')[0];
+      website = await getBusinessWebsite(url);
+    }
+
+    const updatedEvent = {
+      ...event,
       website,
-      price: firstMatch.price,
-      phone: firstMatch.display_phone,
+      price: firstMatch.price || null,
+      phone: firstMatch.display_phone || null,
     };
+
+    return updatedEvent;
   } catch (error) {
-    console.log(error.response.data);
-    return {};
+    if (error.response) {
+      console.log(error.response.data);
+    } else {
+      console.log(error);
+    }
+    return {
+      ...event,
+      price: null,
+      phone: null,
+      website: null,
+    };
   }
+}
+
+async function hydrateEventsWithYelpData(events) {
+  const accessToken = await auth();
+  const hydratedEventPromises = events.map(event =>
+    yelpVenue(accessToken, event),
+  );
+
+  const hydratedEvents = await Promise.all(hydratedEventPromises);
+  return hydratedEvents;
 }
 
 const yelpService = {
   auth,
   yelpVenue,
+  hydrateEventsWithYelpData,
 };
 
 export default yelpService;

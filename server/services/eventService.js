@@ -4,6 +4,7 @@ import cheerio from 'cheerio';
 
 import artists from '../dataAccess/artists';
 import db from '../dataAccess/database';
+import yelpService from './yelpService';
 
 async function scrapeArtistData(artist) {
   let events = [];
@@ -69,7 +70,9 @@ async function hydrateEvent(event) {
 
 async function hydrateEvents() {
   const events = await scrapeTourData();
-  const hydratedEvents = events.map(event => hydrateEvent(event));
+  
+  const updatedEvents = await yelpService.hydrateEventsWithYelpData(events);
+  const hydratedEvents = updatedEvents.map(event => hydrateEvent(event));
   await Promise.all(hydratedEvents);
 }
 
