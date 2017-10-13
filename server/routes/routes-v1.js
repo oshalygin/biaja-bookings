@@ -5,12 +5,14 @@ import artistController from '../controllers/artistController';
 import cronEventsController from '../controllers/cronEventsController';
 import eventsController from '../controllers/eventsController';
 import locationsController from '../controllers/locationsController';
+import yelpController from '../controllers/yelpController';
 
 const router = express.Router();
 router.route('/cron-events').get(cronEventsController.get);
 
 router.route('/events/:id?').get(eventsController.get);
 router.route('/locations').get(locationsController.get);
+router.route('/yelp').get(yelpController.get);
 router.route('/artists').get(artistController.get).post(artistController.post);
 
 router.route('/tour').get(tourController.get);
