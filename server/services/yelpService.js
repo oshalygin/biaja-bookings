@@ -4,12 +4,13 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import { URLSearchParams } from 'url';
 import configuration from '../utilities/configuration';
+import emailService from './emailService';
 
 const YELP_AUTH_ENDPOINT = 'https://api.yelp.com/oauth2/token';
 const YELP_SEARCH_ENDPOINT = 'https://api.yelp.com/v3/businesses/search';
 
 // https://www.yelp.com/developers/documentation/v2/all_category_list
-const SEARCH_API_CATEGORIES = 'nightlife'; // 'nightlife' another alternative
+// const SEARCH_API_CATEGORIES = 'nightlife'; // 'nightlife' another alternative
 
 async function auth() {
   try {
@@ -51,12 +52,15 @@ async function getBusinessWebsite(url) {
 
 async function yelpVenue(accessToken, event) {
   try {
+    let website = null;
+    let contactEmails = null;
+
     const encodedVenue = encodeURIComponent(event.venue);
     const encodedLocation = event.state
       ? encodeURIComponent(`${event.city}, ${event.state}`)
       : encodeURIComponent(`${event.city}, ${event.country}`);
 
-    const endpoint = `${YELP_SEARCH_ENDPOINT}?categories=${SEARCH_API_CATEGORIES}&term=${encodedVenue}&location=${encodedLocation}`;
+    const endpoint = `${YELP_SEARCH_ENDPOINT}?term=${encodedVenue}&location=${encodedLocation}`;
     const { data } = await axios.get(endpoint, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -72,15 +76,20 @@ async function yelpVenue(accessToken, event) {
       };
     }
 
-    let website = null;
     if (firstMatch.url) {
       const url = firstMatch.url.split('?')[0];
       website = await getBusinessWebsite(url);
+      website = website ? website.split('/')[0] : null;
+    }
+
+    if (website) {
+      contactEmails = await emailService.getEmailContacts(website);
     }
 
     const updatedEvent = {
       ...event,
       website,
+      contactEmails,
       price: firstMatch.price || null,
       phone: firstMatch.display_phone || null,
     };
@@ -94,6 +103,7 @@ async function yelpVenue(accessToken, event) {
     }
     return {
       ...event,
+      contactEmails: null,
       price: null,
       phone: null,
       website: null,

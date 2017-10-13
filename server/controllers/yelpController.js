@@ -1,9 +1,9 @@
-import yelpService from '../services/yelpService';
+import emailService from '../services/emailService';
 
 export async function get(request, response) {
-  const { venue, city, state } = request.query;
+  const { domain } = request.query;
 
-  const yelpBusiness = await yelpService.yelpVenue(venue, city, state);
+  const yelpBusiness = await emailService.getEmailContacts(domain);
 
   return response.status(200).json(yelpBusiness);
 }
