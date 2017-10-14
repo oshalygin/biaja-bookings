@@ -28,4 +28,5 @@ export default {
     'zdEOxBLd5xoPdNow5E3RvVwEvurSwj6tQW431qnzpHyxx3YYJNZYGW31eaOrsjqu',
 
   hunterApiKey: 'f409de7e9eff9a0e076121f3fbb0d148135e5847',
+  hunterRequestBatchSize: 50,
 };

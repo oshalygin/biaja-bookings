@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
+import R from 'ramda';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import { URLSearchParams } from 'url';
@@ -113,11 +114,24 @@ async function yelpVenue(accessToken, event) {
 
 async function hydrateEventsWithYelpData(events) {
   const accessToken = await auth();
-  const hydratedEventPromises = events.map(event =>
-    yelpVenue(accessToken, event),
-  );
 
-  const hydratedEvents = await Promise.all(hydratedEventPromises);
+  let eventsToProcess = events;
+  let hydratedEvents = [];
+
+  const batchSize = configuration.hunterRequestBatchSize;
+
+  while (eventsToProcess.length > 0) {
+    console.log(`eventsToProcess:${eventsToProcess.length}`);
+    const eventsToHydrate = R.take(batchSize, eventsToProcess);
+    eventsToProcess = R.drop(batchSize, eventsToProcess);
+
+    const hydratedEventPromises = eventsToHydrate.map(event =>
+      yelpVenue(accessToken, event),
+    );
+    const newlyHydratedEvents = await Promise.all(hydratedEventPromises);
+    hydratedEvents = [...hydratedEvents, ...newlyHydratedEvents];
+  }
+
   return hydratedEvents;
 }
 
