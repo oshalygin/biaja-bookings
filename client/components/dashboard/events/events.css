@@ -6,12 +6,12 @@
 }
 
 .container {
+  overflow: scroll;
   width: 100vw;
   height: 100%;
 }
 
 .events-container {
-  overflow: auto;
   height: 100%;
   color: var(--black);
   font-size: var(--font-xxs);
