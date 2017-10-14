@@ -21,7 +21,7 @@ const propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-class Events extends React.Component {
+class PastEvents extends React.Component {
   state = {
     selected: {
       country: 0,
@@ -123,7 +123,7 @@ class Events extends React.Component {
 
     return (
       <div styleName="container">
-        <GenericTopBar title="Upcoming Events" />
+        <GenericTopBar title="Past Events" />
         <div styleName="events-container">
           <div styleName="controls-container">
             <ControlFields
@@ -151,7 +151,7 @@ class Events extends React.Component {
   }
 }
 
-Events.propTypes = propTypes;
+PastEvents.propTypes = propTypes;
 
 const mapStateToProps = state => {
   return {
@@ -166,4 +166,4 @@ const mapDispatchToProps = dispatch => ({
   locationActions: bindActionCreators(locationActionCreators, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Events);
+export default connect(mapStateToProps, mapDispatchToProps)(PastEvents);
