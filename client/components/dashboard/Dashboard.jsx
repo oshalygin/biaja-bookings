@@ -11,6 +11,7 @@ import LeftNav from './LeftNav';
 import TopBar from './AppBar';
 import Events from './events/Events.jsx';
 import PastEvents from './events/PastEvents.jsx';
+import Venues from './events/Venues.jsx';
 
 import muiTheme from '../../utilities/muiTheme';
 import './dashboard.css';
@@ -33,7 +34,7 @@ class Dashboard extends React.Component {
               <Route exact path={`${path}`} component={Events} />
               <Route path={`${path}/upcoming`} component={Events} />
               <Route path={`${path}/past`} component={PastEvents} />
-              <Route path={`${path}/venues`} component={Events} />
+              <Route path={`${path}/venues`} component={Venues} />
               <Redirect to="/" />
             </Switch>
           </div>
