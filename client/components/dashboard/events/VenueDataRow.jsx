@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TableRow, TableRowColumn } from 'material-ui';
 
-import dateUtilities from '../../../utilities/dateUtilities';
 import EmailDataRowColumn from './EmailDataRowColumn';
 
 const propTypes = {

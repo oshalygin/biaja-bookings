@@ -21,7 +21,9 @@ const VenueDataTable = ({ events }) => {
     <div style={{ width: '100%' }}>
       <div styleName="table">
         <Table
+          style={{ tableLayout: 'auto' }}
           selectable={false}
+          fixedHeader={false}
           style={{
             backgroundColor: colors.neutral.lightGray,
           }}
@@ -38,7 +40,9 @@ const VenueDataTable = ({ events }) => {
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>
               <TableHeaderColumn>Phone Number</TableHeaderColumn>
-              <TableHeaderColumn>Email Contact</TableHeaderColumn>
+              <TableHeaderColumn style={{ width: '20em' }}>
+                Email Contact
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
