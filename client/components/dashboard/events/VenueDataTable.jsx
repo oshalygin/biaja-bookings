@@ -35,7 +35,7 @@ const VenueDataTable = ({ events }) => {
           >
             <TableRow>
               <TableHeaderColumn>Yelp Cost Rating</TableHeaderColumn>
-              <TableHeaderColumn>Venue</TableHeaderColumn>
+              <TableHeaderColumn style={{ width: '20em' }}>Venue</TableHeaderColumn>
               <TableHeaderColumn>City</TableHeaderColumn>
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>
