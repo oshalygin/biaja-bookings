@@ -20,7 +20,7 @@ const VenueDataRow = ({ event }) => {
   return (
     <TableRow style={{ lineHeight: '48px' }}>
       <TableRowColumn style={{ fontWeight: '600' }}>
-        {event.price}
+        {'$'.repeat(event.price)}
       </TableRowColumn>
       <TableRowColumn>
         {event.venue}

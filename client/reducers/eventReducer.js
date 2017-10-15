@@ -11,7 +11,14 @@ export default function eventReducer(state = initialState.events, action) {
     }
     case actionTypes.GET_VENUES_SUCCESS: {
       const events = action.data;
-      return R.sortWith([R.descend(R.prop('price'))], events);
+      // return R.sortWith([R.descend(R.prop('price'))], events);
+      return R.compose(
+        R.sortWith([R.descend(R.prop('price'))]),
+        R.map(event => ({
+          ...event,
+          price: !event.price ? 0 : event.price.length,
+        })),
+      )(events);
     }
     case actionTypes.CLEAR_EVENTS: {
       return initialState.events;
