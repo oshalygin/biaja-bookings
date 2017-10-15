@@ -77,6 +77,13 @@
   display: none;
 }
 
+.email-data-cell {
+  display: flex;
+  flex-direction: column;
+  height: 1.25em;
+  padding-bottom: 0.25em;
+}
+
 @media screen and (max-width: 440px) {
   .table-container {
     padding-top: 2em;

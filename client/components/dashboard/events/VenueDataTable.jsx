@@ -7,17 +7,16 @@ import {
   TableHeaderColumn,
   TableBody,
 } from 'material-ui';
-import DataRow from './DataRow';
+import VenueDataRow from './VenueDataRow';
 
 import colors from '../../../styles/colors';
 import './events.css';
-import dateUtilities from '../../../utilities/dateUtilities';
 
 const propTypes = {
   events: PropTypes.array.isRequired,
 };
 
-const DataTable = ({ events }) => {
+const VenueDataTable = ({ events }) => {
   return (
     <div style={{ width: '100%' }}>
       <div styleName="table">
@@ -26,7 +25,6 @@ const DataTable = ({ events }) => {
           style={{
             backgroundColor: colors.neutral.lightGray,
           }}
-          bodyStyle={{ overflow: 'visible' }}
         >
           <TableHeader
             enableSelectAll={false}
@@ -34,37 +32,39 @@ const DataTable = ({ events }) => {
             adjustForCheckbox={false}
           >
             <TableRow>
-              <TableHeaderColumn>Event Date</TableHeaderColumn>
+              <TableHeaderColumn>Yelp Cost Rating</TableHeaderColumn>
               <TableHeaderColumn>Venue</TableHeaderColumn>
               <TableHeaderColumn>City</TableHeaderColumn>
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>
-              <TableHeaderColumn>Artist</TableHeaderColumn>
-              <TableHeaderColumn>Type</TableHeaderColumn>
+              <TableHeaderColumn>Phone Number</TableHeaderColumn>
+              <TableHeaderColumn>Email Contact</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {events.map((event, key) => <DataRow event={event} key={key} />)}
+            {events.map((event, key) =>
+              <VenueDataRow event={event} key={key} />,
+            )}
           </TableBody>
         </Table>
       </div>
       <div styleName="mobile-table">
         <div styleName="mobile-table-row">
-          <div styleName="mobile-table-header">Event Date</div>
+          <div styleName="mobile-table-header">Cost</div>
           <div styleName="mobile-table-header">Venue</div>
-          <div styleName="mobile-table-header">Artist</div>
+          <div styleName="mobile-table-header">Phone</div>
         </div>
         {events.map((event, key) => {
           return (
             <div styleName="mobile-table-row" key={key}>
               <div styleName="mobile-table-cell">
-                {dateUtilities.setDisplayDate(event.date)}
+                {event.price}
               </div>
               <div styleName="mobile-table-cell">
                 {event.venue}
               </div>
               <div styleName="mobile-table-cell">
-                {event.artist}
+                {event.phone}
               </div>
             </div>
           );
@@ -74,6 +74,6 @@ const DataTable = ({ events }) => {
   );
 };
 
-DataTable.propTypes = propTypes;
+VenueDataTable.propTypes = propTypes;
 
-export default DataTable;
+export default VenueDataTable;

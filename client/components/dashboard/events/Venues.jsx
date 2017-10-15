@@ -8,7 +8,7 @@ import * as locationActionCreators from '../../../actions/locationActions';
 
 import ControlFields from './ControlFields';
 import GenericTopBar from '../../common/GenericAppBar';
-import DataTable from './DataTable';
+import VenueDataTable from './VenueDataTable';
 
 import './events.css';
 import { CircularProgress, FlatButton } from 'material-ui';
@@ -118,7 +118,7 @@ class Venues extends React.Component {
     const cities = this.getCities();
 
     const eventsComponent = !loading
-      ? <DataTable events={events} />
+      ? <VenueDataTable events={events} />
       : <CircularProgress />;
 
     return (
