@@ -22,7 +22,9 @@ const DataTable = ({ events }) => {
     <div style={{ width: '100%' }}>
       <div styleName="table">
         <Table
+          style={{ tableLayout: 'auto' }}
           selectable={false}
+          fixedHeader={false}
           style={{
             backgroundColor: colors.neutral.lightGray,
           }}

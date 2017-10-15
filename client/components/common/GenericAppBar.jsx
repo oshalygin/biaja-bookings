@@ -7,6 +7,7 @@ import colors from '../../styles/colors';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
+  color: PropTypes.string,
 };
 
 const titleStyle = {
@@ -20,14 +21,14 @@ const titleStyle = {
   left: '0.5em',
 };
 
-const appBarStyle = {
-  backgroundColor: colors.neutral.dark,
+const appBarStyle = color => ({
+  backgroundColor: color || colors.neutral.dark,
   height: '3em',
-};
+});
 
-const GenericTopBar = ({ title }) =>
+const GenericTopBar = ({ title, color }) =>
   <AppBar
-    style={appBarStyle}
+    style={{ ...appBarStyle(color) }}
     title={title}
     showMenuIconButton={false}
     titleStyle={titleStyle}

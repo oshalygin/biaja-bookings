@@ -27,6 +27,7 @@ const VenueDataTable = ({ events }) => {
           style={{
             backgroundColor: colors.neutral.lightGray,
           }}
+          bodyStyle={{ overflow: 'visible' }}
         >
           <TableHeader
             enableSelectAll={false}
@@ -35,7 +36,9 @@ const VenueDataTable = ({ events }) => {
           >
             <TableRow>
               <TableHeaderColumn>Yelp Cost Rating</TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '20em' }}>Venue</TableHeaderColumn>
+              <TableHeaderColumn style={{ width: '20em' }}>
+                Venue
+              </TableHeaderColumn>
               <TableHeaderColumn>City</TableHeaderColumn>
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>

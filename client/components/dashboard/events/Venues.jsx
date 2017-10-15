@@ -11,6 +11,7 @@ import GenericTopBar from '../../common/GenericAppBar';
 import VenueDataTable from './VenueDataTable';
 
 import './events.css';
+import colors from '../../../styles/colors';
 import { CircularProgress, FlatButton } from 'material-ui';
 
 const propTypes = {
@@ -123,7 +124,7 @@ class Venues extends React.Component {
 
     return (
       <div styleName="container">
-        <GenericTopBar title="Venues" />
+        <GenericTopBar color={colors.brand.violet} title="Venues" />
         <div styleName="events-container">
           <div styleName="controls-container">
             <ControlFields

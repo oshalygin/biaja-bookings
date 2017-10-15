@@ -11,6 +11,7 @@ import GenericTopBar from '../../common/GenericAppBar';
 import DataTable from './DataTable';
 
 import './events.css';
+import colors from '../../../styles/colors';
 import { CircularProgress, FlatButton } from 'material-ui';
 
 const propTypes = {
@@ -123,7 +124,7 @@ class PastEvents extends React.Component {
 
     return (
       <div styleName="container">
-        <GenericTopBar title="Past Events" />
+        <GenericTopBar color={colors.brand.orange} title="Past Events" />
         <div styleName="events-container">
           <div styleName="controls-container">
             <ControlFields
