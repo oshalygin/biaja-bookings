@@ -18,7 +18,7 @@ const propTypes = {
 
 const VenueDataTable = ({ events }) => {
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', paddingBottom: '10em' }}>
       <div styleName="table">
         <Table
           style={{ tableLayout: 'auto' }}

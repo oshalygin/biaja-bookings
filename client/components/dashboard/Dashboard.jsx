@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = propTypes;
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   return {};
 };
 
