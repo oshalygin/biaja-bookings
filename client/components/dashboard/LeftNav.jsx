@@ -32,21 +32,21 @@ class ListView extends React.Component {
         <List style={{ margin: 0, padding: 0 }}>
           <ListItem
             onClick={() => this.navigateToRoute('upcoming')}
-            leftIcon={<FontIcon className="material-icons">events</FontIcon>}
+            leftIcon={<FontIcon className="material-icons">people</FontIcon>}
           >
             <span styleName="list-item-text">Upcoming Events</span>
           </ListItem>
           <ListItem
             onClick={() => this.navigateToRoute('past')}
             leftIcon={
-              <FontIcon className="material-icons">event_busy</FontIcon>
+              <FontIcon className="material-icons">archive</FontIcon>
             }
           >
             <span styleName="list-item-text">Past Events</span>
           </ListItem>
           <ListItem
             onClick={() => this.navigateToRoute('venues')}
-            leftIcon={<FontIcon className="material-icons">business</FontIcon>}
+            leftIcon={<FontIcon className="material-icons">location_city</FontIcon>}
           >
             <span styleName="list-item-text">Venues</span>
           </ListItem>

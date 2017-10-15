@@ -92,7 +92,7 @@ class Venues extends React.Component {
     const state = states[selected.state];
     const city = cities[selected.city];
 
-    eventActions.retrieveEvents({
+    eventActions.retrieveVenues({
       country,
       state,
       city,

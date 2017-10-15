@@ -14,6 +14,15 @@ export function* getEvents(data) {
   }
 }
 
+export function* getVenues(data) {
+  try {
+    const response = yield call(api.get, EVENTS_ENDPOINT, { ...data });
+    yield put(eventActions.getVenuesSuccess(response.data));
+  } catch (error) {
+    yield put(eventActions.getVenuesFailure());
+  }
+}
+
 /* WATCHERS */
 
 export function* retrieveEvents() {
@@ -23,4 +32,11 @@ export function* retrieveEvents() {
   }
 }
 
-export default [retrieveEvents];
+export function* retrieveVenues() {
+  while (true) {
+    const { data } = yield take(actionTypes.RETRIEVE_VENUES);
+    yield fork(getVenues, data);
+  }
+}
+
+export default [retrieveEvents, retrieveVenues];

@@ -14,6 +14,20 @@ export const getEventsFailure = () => ({
   type: actionTypes.GET_EVENTS_FAILURE,
 });
 
+export const retrieveVenues = data => ({
+  type: actionTypes.RETRIEVE_VENUES,
+  data,
+});
+
+export const getVenuesSuccess = data => ({
+  type: actionTypes.GET_VENUES_SUCCESS,
+  data,
+});
+
+export const getVenuesFailure = () => ({
+  type: actionTypes.GET_VENUES_FAILURE,
+});
+
 export const clearEvents = () => ({
   type: actionTypes.CLEAR_EVENTS,
 });

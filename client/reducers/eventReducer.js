@@ -9,6 +9,10 @@ export default function eventReducer(state = initialState.events, action) {
       const events = action.data;
       return R.sortWith([R.ascend(R.prop('date'))], events);
     }
+    case actionTypes.GET_VENUES_SUCCESS: {
+      const events = action.data;
+      return R.sortWith([R.descend(R.prop('price'))], events);
+    }
     case actionTypes.CLEAR_EVENTS: {
       return initialState.events;
     }
