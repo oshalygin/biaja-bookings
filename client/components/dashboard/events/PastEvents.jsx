@@ -93,6 +93,7 @@ class PastEvents extends React.Component {
     const city = cities[selected.city];
 
     eventActions.retrieveEvents({
+      historical: true,
       country,
       state,
       city,

@@ -93,6 +93,7 @@ class Events extends React.Component {
     const city = cities[selected.city];
 
     eventActions.retrieveEvents({
+      historical: false,
       country,
       state,
       city,

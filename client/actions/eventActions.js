@@ -13,3 +13,7 @@ export const getEventsSuccess = data => ({
 export const getEventsFailure = () => ({
   type: actionTypes.GET_EVENTS_FAILURE,
 });
+
+export const clearEvents = () => ({
+  type: actionTypes.CLEAR_EVENTS,
+});

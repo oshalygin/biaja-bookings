@@ -5,6 +5,13 @@ import cheerio from 'cheerio';
 import artists from '../dataAccess/artists';
 import db from '../dataAccess/database';
 import yelpService from './yelpService';
+import dateUtilities from '../../client/utilities/dateUtilities';
+
+const updatedQueryBasedOnHistoricalFlag = (query, historical) => {
+  return historical
+    ? query.where('dateMillis', '<', dateUtilities.historicalCutoffDate())
+    : query.where('dateMillis', '>=', dateUtilities.historicalCutoffDate());
+};
 
 async function scrapeArtistData(artist) {
   let events = [];
@@ -64,23 +71,30 @@ async function hydrateEvent(event) {
     return true;
   }
 
-  await eventCollection.add({ ...event, eventType: 'Ticketed Concerts' });
+  await eventCollection.add({
+    ...event,
+    eventType: 'Ticketed Concerts',
+    dateMillis: new Date(event.date).valueOf(),
+  });
   return true;
 }
 
 async function hydrateEvents() {
   const events = await scrapeTourData();
-  
+
   const updatedEvents = await yelpService.hydrateEventsWithYelpData(events);
   const hydratedEvents = updatedEvents.map(event => hydrateEvent(event));
   await Promise.all(hydratedEvents);
 }
 
-async function getAllEvents() {
+async function getAllEvents(historical) {
   let data = [];
 
   const eventsCollection = db.collection('events');
-  const snapshot = await eventsCollection.get();
+
+  const query = updatedQueryBasedOnHistoricalFlag(eventsCollection, historical);
+  const snapshot = await query.get();
+
   snapshot.forEach(document => {
     data = [...data, { ...document.data() }];
   });
@@ -88,14 +102,17 @@ async function getAllEvents() {
   return data;
 }
 
-async function getEventsInUnitedStates(city, state) {
+async function getEventsInUnitedStates(city, state, historical) {
   let data = [];
 
   const eventsCollection = db.collection('events');
-  const snapshot = await eventsCollection
+
+  let query = await eventsCollection
     .where('city', '==', city)
-    .where('state', '==', state)
-    .get();
+    .where('state', '==', state);
+
+  query = updatedQueryBasedOnHistoricalFlag(query, historical);
+  const snapshot = await query.get();
 
   snapshot.forEach(document => {
     data = [...data, { ...document.data() }];
@@ -104,13 +121,14 @@ async function getEventsInUnitedStates(city, state) {
   return data;
 }
 
-async function getEventsInUsByState(state) {
+async function getEventsInUsByState(state, historical) {
   let data = [];
 
   const eventsCollection = db.collection('events');
-  const snapshot = await eventsCollection
-    .where('state', '==', state)
-    .get();
+
+  let query = eventsCollection.where('state', '==', state);
+  query = updatedQueryBasedOnHistoricalFlag(query, historical);
+  const snapshot = await query.get();
 
   snapshot.forEach(document => {
     data = [...data, { ...document.data() }];
@@ -119,11 +137,14 @@ async function getEventsInUsByState(state) {
   return data;
 }
 
-async function getEventsOverseas(city) {
+async function getEventsOverseas(city, historical) {
   let data = [];
 
   const eventsCollection = db.collection('events');
-  const snapshot = await eventsCollection.where('city', '==', city).get();
+
+  let query = eventsCollection.where('city', '==', city);
+  query = updatedQueryBasedOnHistoricalFlag(query, historical);
+  const snapshot = await query.get();
 
   snapshot.forEach(document => {
     data = [...data, { ...document.data() }];
