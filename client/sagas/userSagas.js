@@ -26,9 +26,20 @@ export function* getLoggedInUser() {
     } else {
       const response = yield call(api.get, ACCOUNT_ENDPOINT);
       const data = response.data;
-
-      yield put(getLoggedInUserSuccess(data));
-      yield call(history.push, '/dashboard');
+      if (!data.isVerified) {
+        yield call(history.push, '/login');
+        yield call(accountUtilities.removeToken);
+        yield put(getLoggedInUserError());
+        yield put(
+          saveNotification({
+            message:
+              'Your account is not verified, please check with your administrator',
+          }),
+        );
+      } else {
+        yield put(getLoggedInUserSuccess(data));
+        yield call(history.push, '/dashboard');
+      }
     }
   } catch (error) {
     yield call(history.push, '/login');
