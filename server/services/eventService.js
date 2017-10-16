@@ -5,7 +5,7 @@ import cheerio from 'cheerio';
 import artists from '../dataAccess/artists';
 import db from '../dataAccess/database';
 import yelpService from './yelpService';
-import dateUtilities from '../../client/utilities/dateUtilities';
+import dateUtilities from '../utilities/dateUtilities';
 
 const updatedQueryBasedOnHistoricalFlag = (query, historical) => {
   return historical
