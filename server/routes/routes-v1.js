@@ -7,14 +7,21 @@ import cronEventsController from '../controllers/cronEventsController';
 import eventsController from '../controllers/eventsController';
 import locationsController from '../controllers/locationsController';
 import emailController from '../controllers/emailController';
+import registrationController from '../controllers/registrationController';
+
+import authMiddleware from '../middleware/authMiddleware';
 
 const router = express.Router();
 router.route('/cron-events').get(cronEventsController.get);
+router.route('/artists').get(artistController.get).post(artistController.post);
+
+router.route('/registration').post(registrationController.post);
+
+router.use(authMiddleware());
 
 router.route('/events/:id?').get(eventsController.get);
 router.route('/locations').get(locationsController.get);
 router.route('/email').get(emailController.get);
-router.route('/artists').get(artistController.get).post(artistController.post);
 
 router.route('/tour').get(tourController.get);
 

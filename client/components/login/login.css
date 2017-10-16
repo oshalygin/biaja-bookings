@@ -1,0 +1,15 @@
+@import '../../styles/colors.css';
+
+.login-field-container{
+  margin-bottom: 4em;
+}
+
+.login-container {
+  margin-bottom: 6em;
+}
+
+.error-text {
+  color: var(--error);
+  text-align: center;
+  font-weight: 400;
+}

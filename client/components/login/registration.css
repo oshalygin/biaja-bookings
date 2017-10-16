@@ -1,0 +1,44 @@
+@import '../../styles/colors.css';
+
+.registration-container {
+  background-color: var(--typhoon);
+  color: var(--black);
+  width: 30%;
+  margin: 0 auto;
+}
+
+.content-container {
+  width: 100%;
+  background-color: var(--typhoon);
+  padding: 2em;
+}
+
+.logo-name {
+  color: var(--blue);
+}
+
+.login-field-container {
+  margin-bottom: 4em;
+}
+
+.login-container {
+  margin-bottom: 6em;
+}
+
+.error-text {
+  color: var(--error);
+  text-align: center;
+  font-weight: 400;
+}
+
+.form-controls {
+  margin-top: 3em;
+}
+
+.content-container-spinner {
+  height: 38.77em;
+  width: 19em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

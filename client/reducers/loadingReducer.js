@@ -16,6 +16,37 @@ export default function loadingReducer(state = initialState.loading, action) {
         events: true,
       };
     }
+    case actionTypes.REQUEST_LOGGED_IN_USER: {
+      return { ...state, loadingUser: true };
+    }
+    case actionTypes.GET_LOGGED_IN_USER_SUCCESS:
+    case actionTypes.GET_LOGGED_IN_USER_ERROR: {
+      return {
+        ...state,
+        loadingUser: false,
+        loadingUserLogin: false,
+        loadingRegistration: false,
+      };
+    }
+    case actionTypes.LOADED_USER_SUCCESS: {
+      return { ...state, loadingUser: false };
+    }
+    case actionTypes.LOADED_USER_FAILURE:
+    case actionTypes.LOGOUT_SUCCESS: {
+      return { ...state, loadingUser: false };
+    }
+    case actionTypes.REQUEST_LOGIN: {
+      return { ...state, loadingUserLogin: true };
+    }
+    case actionTypes.LOGIN_ERROR: {
+      return { ...state, loadingUserLogin: false };
+    }
+    case actionTypes.REQUEST_REGISTRATION: {
+      return { ...state, loadingRegistration: true };
+    }
+    case actionTypes.REGISTRATION_ERROR: {
+      return { ...state, loadingRegistration: false };
+    }
     default: {
       return state;
     }

@@ -15,7 +15,8 @@ export default {
   devtool: 'eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   entry: [
     // must be first entry to properly set public path
-    './client/webpack-public-path', 'webpack-hot-middleware/client?reload=true',
+    './client/webpack-public-path',
+    'webpack-hot-middleware/client?reload=true',
     path.resolve(__dirname, 'client/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
   ],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
@@ -26,14 +27,49 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
+    new webpack.ProvidePlugin({
+      $: 'jquery', //eslint-disable-line id-length
+      jQuery: 'jquery',
+      'windows.jQuery': 'jquery',
+      'window.$': 'jquery',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HtmlWebpackPlugin({ // Create HTML file that includes references to bundled CSS and JS.
+    new HtmlWebpackPlugin({
+      // Create HTML file that includes references to bundled CSS and JS.
       template: 'client/index.html',
       minify: {
         removeComments: true,
       },
       inject: true,
+    }),
+    new webpack.LoaderOptionsPlugin({
+      debug: true,
+      imageWebpackLoader: {
+        mozjpeg: {
+          quality: 65,
+        },
+        pngquant: {
+          quality: '65-90',
+          speed: 4,
+        },
+        optipng: {
+          optimizationLevel: 65,
+        },
+        gifsicle: {
+          interlaced: false,
+        },
+        svgo: {
+          plugins: [
+            {
+              removeViewBox: false,
+            },
+            {
+              removeEmptyAttrs: false,
+            },
+          ],
+        },
+      },
     }),
   ],
   module: {
@@ -41,87 +77,51 @@ export default {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        loader: 'file-loader',
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff',
-        },
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/octet-stream',
-        },
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/svg+xml',
-        },
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
-      },
-      {
-        test: /\.ico$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
+        exclude: /\.min\.css$/,
         use: [
-          {
-            loader: 'style-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
+          { loader: 'style-loader' },
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1,
+              importLoader: 1,
               localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('postcss-import')({
-                  plugins: [
-                    require('stylelint')(),
-                  ],
-                }),
-                require('postcss-url')(),
-                require('postcss-cssnext')(),
-                require('postcss-reporter')(),
-              ],
             },
           },
         ],
       },
       {
-        test: /\.txt$/,
-        loader: 'raw-loader',
+        test: /\.min\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
+      { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack-loader?bypassOnDebug',
+        ],
       },
     ],
   },

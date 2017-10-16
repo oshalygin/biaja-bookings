@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import history from '../utilities/history';
 import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
+import Login from './login/Login';
+import Registration from './login/Registration';
 
 class App extends React.Component {
   render() {
@@ -14,6 +16,8 @@ class App extends React.Component {
         <Router history={history}>
           <Switch>
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
+            <Route path="/registration" component={Registration} />
             <Route path="/" component={Home} />
             <Redirect to="/" />
           </Switch>

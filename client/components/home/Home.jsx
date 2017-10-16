@@ -5,8 +5,8 @@ import { RaisedButton } from 'material-ui';
 
 import history from '../../utilities/history';
 
-const navigateToDashboard = () => {
-  history.push('/dashboard');
+const navigateToLogin = () => {
+  history.push('/login');
 };
 
 const navigateToRegistration = () => {
@@ -23,10 +23,10 @@ const Home = () => {
           <div styleName="text-content">BIAJA Bookings</div>
           <div styleName="button-control">
             <RaisedButton
-              onClick={navigateToDashboard}
+              onClick={navigateToLogin}
               fullWidth
               primary
-              label="go to dashboard"
+              label="login"
             />
           </div>
           <div styleName="button-control">
