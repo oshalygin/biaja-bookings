@@ -11,13 +11,13 @@ const propTypes = {
 };
 
 const titleStyle = {
-  fontSize: fonts.fontSm,
-  fontWeight: '400',
+  fontSize: fonts.fontLg,
+  fontWeight: '500',
   color: colors.opacity.white0_8,
   display: 'flex',
   justifyContent: 'center',
   position: 'relative',
-  top: '-0.5em',
+  top: '-0.75em',
   left: '0.5em',
 };
 

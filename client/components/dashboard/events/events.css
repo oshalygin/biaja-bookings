@@ -14,7 +14,7 @@
 .events-container {
   height: 100%;
   color: var(--black);
-  font-size: var(--font-xxs);
+  font-size: var(--font-md);
   padding: 2em;
 }
 

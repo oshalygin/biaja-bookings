@@ -43,7 +43,7 @@ const Control = ({
           }}
           fullWidth
           onChange={onChange}
-          labelStyle={{ fontSize: fonts.fontXxs }}
+          labelStyle={{ fontSize: fonts.fontMd }}
         >
           {dataSet.map(option => {
             return (
