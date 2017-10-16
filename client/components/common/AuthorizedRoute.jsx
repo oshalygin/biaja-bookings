@@ -12,7 +12,7 @@ import muiTheme from '../../utilities/muiTheme';
 
 import R from 'ramda';
 
-import Spinner from './spinner';
+import Spinner from './Spinner';
 
 class AuthorizedRoute extends React.Component {
   componentWillMount() {
