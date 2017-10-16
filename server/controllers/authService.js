@@ -36,7 +36,7 @@ async function register(email, password, firstName, lastName) {
     createdDate: new Date().valueOf(),
   });
 
-  return setJwtToken({ id: document.id, email, isVerified: true });
+  return setJwtToken({ id: document.id, email, isVerified: false });
 }
 
 async function login(email, password) {
