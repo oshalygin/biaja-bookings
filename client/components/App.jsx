@@ -7,6 +7,7 @@ import history from '../utilities/history';
 import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
 import Registration from './login/Registration';
+import Unverified from './login/Unverified';
 
 import AuthorizedRoute from './common/AuthorizedRoute';
 
@@ -19,6 +20,7 @@ class App extends React.Component {
             <AuthorizedRoute path="/dashboard" component={Dashboard} />
             <Route path="/login" component={Login} />
             <Route path="/registration" component={Registration} />
+            <Route path="/unverified" component={Unverified} />
             <AuthorizedRoute path="/" component={Dashboard} />
             <Redirect to="/login" />
           </Switch>
