@@ -19,7 +19,6 @@ import { ACCOUNT_ENDPOINT } from '../utilities/endpoints';
 export function* getLoggedInUser() {
   try {
     const token = yield call(accountUtilities.loadToken);
-    console.log(token);
     if (!token) {
       yield call(accountUtilities.removeToken);
       yield put(getLoggedInUserError());
