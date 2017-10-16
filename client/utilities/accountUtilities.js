@@ -1,13 +1,11 @@
-import jwt from 'jwt-decode';
 import Cookies from 'universal-cookie';
 
 const getCookies = () => new Cookies();
 
-export async function getAccountPayload() {
+export async function loadToken() {
   return new Promise((resolve, reject) => {
     try {
-      const accessToken = getCookies().get('access_token');
-      const token = jwt(accessToken);
+      const token = getCookies().get('access_token');
       resolve(token);
     } catch (error) {
       reject(error);
@@ -15,12 +13,7 @@ export async function getAccountPayload() {
   });
 }
 
-export async function getUserId() {
-  const accountPayload = await getAccountPayload();
-  return accountPayload.id;
-}
-
-export function logoutUser() {
+export function removeToken() {
   return new Promise((resolve, reject) => {
     try {
       const cookies = getCookies();
@@ -35,7 +28,6 @@ export function logoutUser() {
 }
 
 export default {
-  getAccountPayload,
-  getUserId,
-  logoutUser,
+  removeToken,
+  loadToken,
 };

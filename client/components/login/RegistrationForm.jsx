@@ -6,6 +6,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import './registration.css';
 import TextField from '../common/TextField';
 
+const underlineStyle = {
+  borderBottom: '1px solid rgb(224, 224, 224)',
+};
+
 const RegistrationForm = ({
   hidden,
   errors,
@@ -29,6 +33,7 @@ const RegistrationForm = ({
           <div styleName="form-controls">
             <TextField
               floatingLabelFixed
+              underlineStyle={underlineStyle}
               floatingLabelText="Email Address"
               name="email"
               type="text"
@@ -39,6 +44,7 @@ const RegistrationForm = ({
             />
             <TextField
               floatingLabelFixed
+              underlineStyle={underlineStyle}
               floatingLabelText="Password"
               name="password"
               type="password"
@@ -47,6 +53,7 @@ const RegistrationForm = ({
             />
             <TextField
               floatingLabelFixed
+              underlineStyle={underlineStyle}
               floatingLabelText="Confirm Password"
               name="confirmPassword"
               type="password"
@@ -58,6 +65,7 @@ const RegistrationForm = ({
             />
             <TextField
               floatingLabelFixed
+              underlineStyle={underlineStyle}
               floatingLabelText="First Name"
               name="firstName"
               type="text"
@@ -66,6 +74,7 @@ const RegistrationForm = ({
             />
             <TextField
               floatingLabelFixed
+              underlineStyle={underlineStyle}
               floatingLabelText="Last Name"
               name="lastName"
               type="text"

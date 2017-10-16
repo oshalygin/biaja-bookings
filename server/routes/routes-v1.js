@@ -8,12 +8,18 @@ import eventsController from '../controllers/eventsController';
 import locationsController from '../controllers/locationsController';
 import emailController from '../controllers/emailController';
 import registrationController from '../controllers/registrationController';
+import accountController from '../controllers/accountController';
 
 import authMiddleware from '../middleware/authMiddleware';
 
 const router = express.Router();
 router.route('/cron-events').get(cronEventsController.get);
 router.route('/artists').get(artistController.get).post(artistController.post);
+
+router
+  .route('/account')
+  .post(accountController.post)
+  .get(accountController.get);
 
 router.route('/registration').post(registrationController.post);
 

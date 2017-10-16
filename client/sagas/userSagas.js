@@ -19,6 +19,7 @@ import { ACCOUNT_ENDPOINT } from '../utilities/endpoints';
 export function* getLoggedInUser() {
   try {
     const token = yield call(accountUtilities.loadToken);
+    console.log(token);
     if (!token) {
       yield call(accountUtilities.removeToken);
       yield put(getLoggedInUserError());
@@ -40,7 +41,7 @@ export function* getLoggedInUser() {
 export function* login(loginPostData) {
   try {
     yield call(api.post, ACCOUNT_ENDPOINT, {
-      username: loginPostData.email,
+      email: loginPostData.email,
       password: loginPostData.password,
     });
 

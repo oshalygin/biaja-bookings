@@ -23,7 +23,7 @@ function authMiddleware() {
       return next();
     }
 
-    return response.status(403).send('Forbidden');
+    return response.status(403).send('Forbidden - Please check with your admin for access');
   };
 }
 
