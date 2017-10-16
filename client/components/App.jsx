@@ -4,7 +4,6 @@ import { Switch, Route, Redirect, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import history from '../utilities/history';
-import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
 import Registration from './login/Registration';
