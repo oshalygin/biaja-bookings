@@ -1,5 +1,6 @@
 import db from '../dataAccess/database';
 import artists from '../dataAccess/artists';
+import secondaryArtists from '../dataAccess/secondaryArtists';
 
 async function hydrateArtist(artist) {
   const artistsCollection = db.collection('artists');
@@ -16,13 +17,15 @@ async function hydrateArtist(artist) {
     dateAdded: new Date(),
     name: artist.name,
     url: artist.url,
+    level: artist.level,
   });
 
   return true;
 }
 
 async function hydrateArtists() {
-  const hydratedArtists = artists.map(artist => hydrateArtist(artist));
+  const artistCollection = [...artists, ...secondaryArtists];
+  const hydratedArtists = artistCollection.map(artist => hydrateArtist(artist));
   await Promise.all(hydratedArtists);
 }
 
