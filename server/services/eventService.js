@@ -1,10 +1,10 @@
 /* eslint-disable quotes */
-import R from 'ramda';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import Crawler from 'crawler';
 
 import artists from '../dataAccess/artists';
+import secondaryArtists from '../dataAccess/secondaryArtists';
 import db from '../dataAccess/database';
 import yelpService from './yelpService';
 import dateUtilities from '../utilities/dateUtilities';
@@ -74,7 +74,10 @@ const hydrateArtistEvent = artist => {
 };
 
 async function hydrateArtistEventsIteratively() {
-  const performances = artists.map(artist => hydrateArtistEvent(artist));
+  const artistCollection = [...secondaryArtists, ...artists];
+  const performances = artistCollection.map(artist =>
+    hydrateArtistEvent(artist),
+  );
   await Promise.all(performances);
 
   // const events = collectionOfEventPromises.reduce((previous, next) => {
