@@ -1,4 +1,4 @@
-import authService from './authService';
+import authService from '../services/authService';
 
 export async function post(request, response) {
   const { email, password, firstName, lastName } = request.body;

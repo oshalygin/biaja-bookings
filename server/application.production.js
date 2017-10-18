@@ -3,8 +3,9 @@ import path from 'path';
 import configuration from './utilities/configuration';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-
 import logger from './utilities/logger';
+
+import db from './dataAccess/db';
 
 import v1router from './routes/routes-v1';
 
@@ -24,6 +25,11 @@ application.get('*', (request, response) => {
   const clientEntryPoint = path.join(__dirname, '../dist-client/index.html');
   response.sendFile(clientEntryPoint);
 });
+
+db
+  .connect()
+  .then(nativeConnection => db.connectedOutput(nativeConnection))
+  .catch(error => console.log(error));
 
 application.listen(port, error => {
   if (error) {

@@ -8,6 +8,8 @@ import configuration from './utilities/configuration';
 import webpackConfiguration from '../webpack.config.dev';
 import logger from './utilities/logger';
 
+import db from './dataAccess/db';
+
 import v1router from './routes/routes-v1';
 
 const port = configuration.port;
@@ -47,6 +49,11 @@ application.get('*', (request, response) => {
     response.end();
   });
 });
+
+db
+  .connect()
+  .then(nativeConnection => db.connectedOutput(nativeConnection))
+  .catch(error => console.log(error));
 
 application.listen(port, error => {
   if (error) {

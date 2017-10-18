@@ -1,4 +1,4 @@
-import authService from './authService';
+import authService from '../services/authService';
 import { authenticationToken } from '../middleware/authMiddleware';
 
 export async function post(request, response) {

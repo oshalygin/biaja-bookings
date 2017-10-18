@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import db, { authenticationServer } from '../dataAccess/database';
+import { authenticationServer } from '../dataAccess/database';
+import usersDAL from '../dataAccess/usersDAL';
 import firebase from '../dataAccess/firebase';
 
 import configuration from '../utilities/configuration';
@@ -25,18 +26,18 @@ async function register(email, password, firstName, lastName) {
   });
 
   const userId = userObject.toJSON().uid;
-  const usersCollection = db.collection('users');
 
-  const document = await usersCollection.doc(userId).set({
+  const user = await usersDAL.save({
+    authId: userId,
     email,
     password,
     firstName,
     lastName,
-    isVerified: false,
+    isVerified: true,
     createdDate: new Date().valueOf(),
   });
 
-  return setJwtToken({ id: document.id, email, isVerified: false });
+  return setJwtToken({ authId: userId, email, isVerified: user.isVerified });
 }
 
 async function login(email, password) {
@@ -46,11 +47,10 @@ async function login(email, password) {
 
   const userId = userRecord.toJSON().uid;
 
-  const userDocumentReference = db.collection('users').doc(userId);
-  const userDocument = await userDocumentReference.get();
-  const user = userDocument.data();
-
-  await userDocumentReference.update({ password });
+  const user = await usersDAL.findAndUpdatePassword({
+    authId: userId,
+    password,
+  });
 
   return setJwtToken({ id: userId, email, isVerified: user.isVerified });
 }
