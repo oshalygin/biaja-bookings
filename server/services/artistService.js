@@ -24,8 +24,8 @@ async function hydrateArtist(artist) {
 }
 
 async function hydrateArtists() {
-  // const artistCollection = [...artists, ...secondaryArtists];
-  const artistCollection = [...artists];
+  const artistCollection = [...artists, ...secondaryArtists];
+  // const artistCollection = [...artists];
   const hydratedArtists = artistCollection.map(artist => hydrateArtist(artist));
   await Promise.all(hydratedArtists);
 }
