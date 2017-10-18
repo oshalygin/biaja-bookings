@@ -106,6 +106,15 @@ class PastEvents extends React.Component {
     const property = payload.name;
     selected[property] = payload.value;
 
+    if (property === 'state') {
+      selected.city = 0;
+    }
+
+    if (property === 'country') {
+      selected.city = 0;
+      selected.state = 0;
+    }
+
     this.onSearch(selected);
     return this.setState({ selected });
   };
