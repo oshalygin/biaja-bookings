@@ -178,52 +178,25 @@ async function getAllEvents(historical) {
 }
 
 async function getEventsInUnitedStates(city, state, historical) {
-  let data = [];
-
-  const eventsCollection = db.collection('events');
-
-  let query = await eventsCollection
-    .where('city', '==', city)
-    .where('state', '==', state);
-
-  query = updatedQueryBasedOnHistoricalFlag(query, historical);
-  const snapshot = await query.get();
-
-  snapshot.forEach(document => {
-    data = [...data, { ...document.data() }];
-  });
+  const data = historical
+    ? await eventsDAL.findHistoricalEventsInUnitedStates(city, state)
+    : await eventsDAL.findNonHistoricalEventsInUnitedStates(city, state);
 
   return data;
 }
 
 async function getEventsInUsByState(state, historical) {
-  let data = [];
-
-  const eventsCollection = db.collection('events');
-
-  let query = eventsCollection.where('state', '==', state);
-  query = updatedQueryBasedOnHistoricalFlag(query, historical);
-  const snapshot = await query.get();
-
-  snapshot.forEach(document => {
-    data = [...data, { ...document.data() }];
-  });
+  const data = historical
+    ? await eventsDAL.findHistoricalEventsInState(state)
+    : await eventsDAL.findNonHistoricalEventsInState(state);
 
   return data;
 }
 
 async function getEventsOverseas(city, historical) {
-  let data = [];
-
-  const eventsCollection = db.collection('events');
-
-  let query = eventsCollection.where('city', '==', city);
-  query = updatedQueryBasedOnHistoricalFlag(query, historical);
-  const snapshot = await query.get();
-
-  snapshot.forEach(document => {
-    data = [...data, { ...document.data() }];
-  });
+  const data = historical
+    ? await eventsDAL.findHistoricalEventsOverseas(city)
+    : await eventsDAL.findNonHistoricalEventsOverseas(city);
 
   return data;
 }

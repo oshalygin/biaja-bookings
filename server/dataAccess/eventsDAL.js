@@ -47,11 +47,79 @@ async function findNotHistorical() {
   return events;
 }
 
+async function findHistoricalEventsInUnitedStates(city, state) {
+  const events = await Event.find({
+    city,
+    state,
+  })
+    .where('dateMillis')
+    .lt(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
+async function findNonHistoricalEventsInUnitedStates(city, state) {
+  const events = await Event.find({
+    city,
+    state,
+  })
+    .where('dateMillis')
+    .gte(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
+async function findHistoricalEventsInState(state) {
+  const events = await Event.find({
+    state,
+  })
+    .where('dateMillis')
+    .lt(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
+async function findNonHistoricalEventsInState(state) {
+  const events = await Event.find({
+    state,
+  })
+    .where('dateMillis')
+    .gte(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
+async function findHistoricalEventsOverseas(city) {
+  const events = await Event.find({
+    city,
+  })
+    .where('dateMillis')
+    .lt(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
+async function findNonHistoricalEventsOverseas(city) {
+  const events = await Event.find({
+    city,
+  })
+    .where('dateMillis')
+    .gte(dateUtilities.historicalCutoffDate());
+
+  return events;
+}
+
 const eventsDAL = {
   findOneAndUpdate,
   findHistorical,
   find,
   findNotHistorical,
+  findHistoricalEventsInUnitedStates,
+  findNonHistoricalEventsInUnitedStates,
+  findHistoricalEventsInState,
+  findNonHistoricalEventsInState,
+  findHistoricalEventsOverseas,
+  findNonHistoricalEventsOverseas,
 };
 
 export default eventsDAL;
