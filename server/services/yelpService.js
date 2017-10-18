@@ -6,6 +6,7 @@ import cheerio from 'cheerio';
 import { URLSearchParams } from 'url';
 import configuration from '../utilities/configuration';
 import emailService from './emailService';
+import eventsDAL from '../dataAccess/eventsDAL';
 
 const YELP_AUTH_ENDPOINT = 'https://api.yelp.com/oauth2/token';
 const YELP_SEARCH_ENDPOINT = 'https://api.yelp.com/v3/businesses/search';
@@ -94,51 +95,70 @@ async function yelpVenue(accessToken, event) {
       price: firstMatch.price || null,
       phone: firstMatch.display_phone || null,
     };
-
-    return updatedEvent;
+    console.log(`saving venue: ${event.venue}`);
+    await eventsDAL.findOneAndUpdate(updatedEvent);
+    return true;
   } catch (error) {
     if (error.response) {
       console.log(error.response.data);
     } else {
       console.log(error);
     }
-    return {
+    const updatedEvent = {
       ...event,
       contactEmails: null,
       price: null,
       phone: null,
       website: null,
     };
+    console.log(`saving venue: ${event.venue}`);
+    await eventsDAL.findOneAndUpdate(updatedEvent);
+    return true;
   }
 }
 
-async function hydrateEventsWithYelpData(events) {
+async function hydrateEventsWithYelpData(events, callback) {
   const accessToken = await auth();
 
   let eventsToProcess = events;
-  let hydratedEvents = [];
 
   const batchSize = configuration.hunterRequestBatchSize;
 
   while (eventsToProcess.length > 0) {
-    console.log(`eventsToProcess:${eventsToProcess.length}`);
+    const artist = eventsToProcess[0].artist;
+    console.log(`[${artist}]: eventsToProcess:${eventsToProcess.length}`);
     const eventsToHydrate = R.take(batchSize, eventsToProcess);
     eventsToProcess = R.drop(batchSize, eventsToProcess);
 
     const hydratedEventPromises = eventsToHydrate.map(event =>
       yelpVenue(accessToken, event),
     );
-    const newlyHydratedEvents = await Promise.all(hydratedEventPromises);
-    hydratedEvents = [...hydratedEvents, ...newlyHydratedEvents];
+    await Promise.all(hydratedEventPromises);
   }
-
-  return hydratedEvents;
+  callback();
 }
+
+const hydrateEventWithYelpData = async (event, callback) => {
+  const accessToken = await auth();
+  await yelpVenue(accessToken, event);
+  callback();
+};
+
+// async function hydrateEventWithYelpData(eventsToHydrate) {
+//   // let hydratedEvents = [];
+//   const accessToken = await auth();
+//   const hydratedEventPromises = eventsToHydrate.map(event =>
+//     yelpVenue(accessToken, event),
+//   );
+//   const hydratedEvents = await Promise.all(hydratedEventPromises);
+//   return hydratedEvents;
+// }
 
 const yelpService = {
   auth,
   yelpVenue,
   hydrateEventsWithYelpData,
+  hydrateEventWithYelpData,
 };
 
 export default yelpService;
