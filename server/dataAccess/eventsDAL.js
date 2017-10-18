@@ -1,5 +1,5 @@
 import Event from './models/event';
-import dateUtilities from '../../client/utilities/dateUtilities';
+import dateUtilities from '../utilities/dateUtilities';
 
 async function findOneAndUpdate(model) {
   const event = new Event({
