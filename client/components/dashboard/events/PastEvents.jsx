@@ -39,9 +39,9 @@ class PastEvents extends React.Component {
   getCountries = () => {
     const { locations } = this.props;
 
-    return R.uniqBy(data => data.country, locations).map(
-      location => location.country,
-    );
+    return R.uniqBy(data => data.country, locations)
+      .map(location => location.country)
+      .reverse();
   };
 
   getStates = () => {

@@ -39,9 +39,9 @@ class Events extends React.Component {
   getCountries = () => {
     const { locations } = this.props;
 
-    return R.uniqBy(data => data.country, locations).map(
-      location => location.country,
-    );
+    return R.uniqBy(data => data.country, locations)
+      .map(location => location.country)
+      .reverse();
   };
 
   getStates = () => {
@@ -106,14 +106,14 @@ class Events extends React.Component {
     const property = payload.name;
     selected[property] = payload.value;
 
-    if (property === 'state') {
-      selected.city = 0;
-    }
+    // if (property === 'state') {
+    //   selected.city = 0;
+    // }
 
-    if (property === 'country') {
-      selected.city = 0;
-      selected.state = 0;
-    }
+    // if (property === 'country') {
+    //   selected.city = 0;
+    //   selected.state = 0;
+    // }
 
     this.onSearch(selected);
     return this.setState({ selected });
