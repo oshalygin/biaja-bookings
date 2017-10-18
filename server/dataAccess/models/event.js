@@ -42,9 +42,7 @@ const venueSchema = new Schema({
     required: false,
   },
   price: {
-    type: Number,
-    get: value => Math.round(value),
-    set: value => Math.round(value),
+    type: String,
     required: false,
   },
   phone: {

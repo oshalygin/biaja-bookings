@@ -60,7 +60,7 @@ class AuthorizedRoute extends React.Component {
 
 AuthorizedRoute.propTypes = {
   component: PropTypes.any.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   user: PropTypes.object.isRequired,
   userActions: PropTypes.object.isRequired,
 };
