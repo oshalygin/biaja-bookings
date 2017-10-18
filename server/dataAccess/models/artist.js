@@ -18,7 +18,9 @@ const artistSchema = new Schema({
     required: true,
   },
   createdDate: {
-    type: Date,
+    type: Number,
+    get: value => Math.round(value),
+    set: value => Math.round(value),
     required: true,
   },
 });
