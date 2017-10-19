@@ -57,7 +57,7 @@ class ListView extends React.Component {
               <FontIcon className="material-icons">location_city</FontIcon>
             }
           >
-            <span styleName="list-item-text">Venues</span>
+            <span styleName="list-item-text">Event Venues</span>
           </ListItem>
           <ListItem
             onClick={() => this.navigateToLogin()}
