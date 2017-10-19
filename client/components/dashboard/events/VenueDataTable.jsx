@@ -43,7 +43,7 @@ const VenueDataTable = ({ events }) => {
               <TableHeaderColumn>State</TableHeaderColumn>
               <TableHeaderColumn>Country</TableHeaderColumn>
               <TableHeaderColumn>Phone Number</TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '20em' }}>
+              <TableHeaderColumn style={{ width: '25em' }}>
                 Email Contact
               </TableHeaderColumn>
             </TableRow>
