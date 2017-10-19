@@ -1,5 +1,6 @@
 /* eslint-disable quotes */
 import Crawler from 'crawler';
+import shuffle from 'shuffle-array';
 
 import artists from '../dataAccess/artists';
 import secondaryArtists from '../dataAccess/secondaryArtists';
@@ -64,7 +65,12 @@ const hydrateArtistEvent = artist => {
 };
 
 async function hydrateArtistEventsIteratively() {
-  const artistCollection = [...secondaryArtists, ...artists];
+  const shuffledSecondaryArtistCollection = shuffle(secondaryArtists, {
+    copy: true,
+  });
+
+  const artistCollection = [...artists, ...shuffledSecondaryArtistCollection];
+
   const performances = artistCollection.map(artist =>
     hydrateArtistEvent(artist),
   );
