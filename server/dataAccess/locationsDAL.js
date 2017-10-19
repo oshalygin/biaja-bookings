@@ -5,6 +5,7 @@ async function findOneAndUpdate(model) {
     city: model.city,
     state: model.state,
     country: model.country,
+    level: model.level || 0,
   };
 
   const location = new Location({ ...locationModel });
