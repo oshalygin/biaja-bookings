@@ -131,6 +131,7 @@
     "redux-saga": "0.15.4",
     "resolve-url": "0.2.1",
     "rimraf": "2.6.1",
+    "shuffle-array": "^1.0.1",
     "sinon": "3.0.0",
     "source-map-support": "0.4.15",
     "style-loader": "0.13.2",
