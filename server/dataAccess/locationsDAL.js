@@ -22,6 +22,7 @@ async function findOneAndUpdate(model) {
     },
     {
       upsert: true,
+      setDefaultsOnInsert: true,
       new: true,
     },
   );

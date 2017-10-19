@@ -15,6 +15,13 @@ const locationSchema = new Schema({
     type: String,
     required: true,
   },
+  level: {
+    type: Number,
+    get: value => Math.round(value),
+    set: value => Math.round(value),
+    required: false,
+    default: 0,
+  },
   createdDate: {
     type: Number,
     get: value => Math.round(value),
