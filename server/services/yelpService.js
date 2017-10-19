@@ -7,6 +7,7 @@ import { URLSearchParams } from 'url';
 import configuration from '../utilities/configuration';
 import emailService from './emailService';
 import eventsDAL from '../dataAccess/eventsDAL';
+import locationsDAL from '../dataAccess/locationsDAL';
 
 const YELP_AUTH_ENDPOINT = 'https://api.yelp.com/oauth2/token';
 const YELP_SEARCH_ENDPOINT = 'https://api.yelp.com/v3/businesses/search';
@@ -97,6 +98,7 @@ async function yelpVenue(accessToken, event) {
     };
     console.log(`saving venue: ${event.venue}`);
     await eventsDAL.findOneAndUpdate(updatedEvent);
+    await locationsDAL.findOneAndUpdate(event);
     return true;
   } catch (error) {
     if (error.response) {
@@ -113,6 +115,7 @@ async function yelpVenue(accessToken, event) {
     };
     console.log(`saving venue: ${event.venue}`);
     await eventsDAL.findOneAndUpdate(updatedEvent);
+    await locationsDAL.findOneAndUpdate(event);
     return true;
   }
 }
@@ -143,16 +146,6 @@ const hydrateEventWithYelpData = async (event, callback) => {
   await yelpVenue(accessToken, event);
   callback();
 };
-
-// async function hydrateEventWithYelpData(eventsToHydrate) {
-//   // let hydratedEvents = [];
-//   const accessToken = await auth();
-//   const hydratedEventPromises = eventsToHydrate.map(event =>
-//     yelpVenue(accessToken, event),
-//   );
-//   const hydratedEvents = await Promise.all(hydratedEventPromises);
-//   return hydratedEvents;
-// }
 
 const yelpService = {
   auth,
