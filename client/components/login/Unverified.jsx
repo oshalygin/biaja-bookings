@@ -23,7 +23,7 @@ const Unverified = () =>
               styleName="logo-name"
               style={{ fontSize: '10em' }}
             >
-              BIAJI
+              AB
             </h1>
           </div>
           <div styleName="content-container">

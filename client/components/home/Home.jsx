@@ -20,7 +20,7 @@ const Home = () => {
     <MuiThemeProvider muiTheme={muiTheme}>
       <div styleName="main-content">
         <div styleName="content-box-container">
-          <div styleName="text-content">BIAJA Bookings</div>
+          <div styleName="text-content">Artist Booking</div>
           <div styleName="button-control">
             <RaisedButton
               onClick={navigateToLogin}

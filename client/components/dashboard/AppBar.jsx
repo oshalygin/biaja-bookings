@@ -22,7 +22,7 @@ const TopBar = () =>
       </IconButton>
     }
     titleStyle={titleStyle}
-    title="BIAJA Bookings"
+    title="Artist Booking"
   />;
 
 export default TopBar;

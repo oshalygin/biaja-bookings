@@ -107,7 +107,7 @@ class Login extends React.Component {
                   className="logo-name"
                   style={{ fontSize: '10em', marginBottom: '0.25em' }}
                 >
-                  BIAJI
+                  AB
                 </h1>
               </div>
               <h3>Welcome back to the Artist Dashboard</h3>
@@ -121,7 +121,7 @@ class Login extends React.Component {
               />
               <Spinner hidden={!loading} />
               <p className="m-t">
-                <small>BIAJI is a registered trademark of BIAJI, LLC.</small>
+                <small>Artist Booking is a registered trademark of Artists Bookings, LLC.</small>
               </p>
             </div>
           </div>
