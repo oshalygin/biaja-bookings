@@ -34,7 +34,7 @@ async function auth() {
     return data.access_token;
   } catch (error) {
     console.log(error);
-    return {};
+    return null;
   }
 }
 
