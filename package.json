@@ -153,7 +153,9 @@
   },
   "jest": {
     "testRegex": ".*?(\\.spec).js",
-    "transformIgnorePatterns": ["node_modules"],
+    "transformIgnorePatterns": [
+      "node_modules"
+    ],
     "collectCoverageFrom": [
       "client/**/*.js",
       "client/**/*.jsx",
@@ -162,11 +164,19 @@
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest/build/index.js"
     },
-    "setupFiles": ["./utilities/testSetup.js"],
+    "setupFiles": [
+      "./utilities/testSetup.js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/utilities/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     },
-    "coverageReporters": ["json", "html", "text", "lcov", "clover"]
+    "coverageReporters": [
+      "json",
+      "html",
+      "text",
+      "lcov",
+      "clover"
+    ]
   }
 }
