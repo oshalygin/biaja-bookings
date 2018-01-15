@@ -1,9 +1,9 @@
 <p align="center">
   <img alt="GitHub Logo" src="docs/itunes_logo.png" height="140" />
-  <h3 align="center">BIAJA Bookings</h3>
+  <h3 align="center">Artist Bookings</h3>
   <p align="center">Bookings data aggregation</p>
   <p align="center">
-    <a href="https://travis-ci.com/oshalygin/biaja-bookings"><img alt="Travis" src="https://travis-ci.com/oshalygin/biaja-bookings.svg?branch=master"></a>
+    <a href="https://travis-ci.org/oshalygin/biaja-bookings"><img alt="Travis" src="https://travis-ci.com/oshalygin/biaja-bookings.svg?branch=master"></a>
     <a href="/LICENSE.md"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
   </p>
 </p>
@@ -59,7 +59,9 @@ Supporting Artists
 | French Montana     | http://bandsintown.com/FrenchMontana  |
 | Soulja Boy     | http://bandsintown.com/SouljaBoyTell'Em  |
 
-## Artists are pulled from a static source:
+Additional artists listed in `artist.js` which references priority.
+
+## Artists are pulled from a static source
 
 In the future they will be pulled form www.billboards.com
 http://www.billboard.com/artists/a
